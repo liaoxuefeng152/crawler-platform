@@ -1,0 +1,7 @@
+- name: "商品价格"
+  description: "网页中展示的商品实际售价，不含运费、优惠券等附加费用"
+  type_hint: "price"
+
+- name: "上市时间"
+  description: "产品首次上市日期"
+  type_hint: "date"
