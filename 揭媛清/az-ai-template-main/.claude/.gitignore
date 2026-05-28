@@ -1,0 +1,13 @@
+# 工作流锁文件
+.workflow-lock
+.workflow-running
+
+# 工作流临时文件
+*.tmp.md
+*.bak.md
+
+# 工作流缓存
+.workflow-cache
+
+# 调试日志
+*.debug.log

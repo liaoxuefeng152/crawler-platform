@@ -1,0 +1,14 @@
+{
+  "cookies": [],
+  "origins": [
+    {
+      "origin": "http://localhost:3006",
+      "localStorage": [
+        {
+          "name": "az-user-info",
+          "value": "{\"state\":{\"user\":{\"id\":\"13800138000\",\"username\":\"13800138000\",\"name\":\"测试用户\",\"email\":\"test@example.com\",\"role\":\"user\",\"displayName\":\"测试用户\",\"phone\":\"13800138000\"},\"isAuthenticated\":true},\"version\":0}"
+        }
+      ]
+    }
+  ]
+}

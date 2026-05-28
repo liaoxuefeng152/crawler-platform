@@ -1,0 +1,1152 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "深瞳AI Coding API",
+    "version": "1.0.0",
+    "description": "深瞳AI Coding 平台的 API 接口文档 - 使用 next-swagger-doc 自动生成"
+  },
+  "servers": [
+    {
+      "url": "/",
+      "description": "当前服务器（相对路径）"
+    },
+    {
+      "url": "http://localhost:3000",
+      "description": "开发服务器"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Users",
+      "description": "用户管理相关接口"
+    },
+    {
+      "name": "Authentication",
+      "description": "用户认证相关接口（登录、注册、令牌刷新等）"
+    }
+  ],
+  "paths": {
+    "/api/auth/login": {
+      "post": {
+        "summary": "用户登录",
+        "description": "使用用户名和密码进行登录验证。登录成功后返回访问令牌和刷新令牌。",
+        "tags": [
+          "Authentication"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "username",
+                  "password"
+                ],
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 50,
+                    "description": "用户名",
+                    "example": "john_doe"
+                  },
+                  "password": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 100,
+                    "description": "密码",
+                    "example": "password123"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "登录成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "user": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "example": "1",
+                          "description": "用户ID"
+                        },
+                        "username": {
+                          "type": "string",
+                          "example": "john_doe",
+                          "description": "用户名"
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "example": "John Doe",
+                          "description": "显示名称"
+                        },
+                        "email": {
+                          "type": "string",
+                          "format": "email",
+                          "example": "john@example.com",
+                          "description": "邮箱地址"
+                        }
+                      }
+                    },
+                    "accessToken": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+                      "description": "访问令牌（24小时有效期）"
+                    },
+                    "refreshToken": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+                      "description": "刷新令牌"
+                    },
+                    "expiresIn": {
+                      "type": "number",
+                      "example": 86400,
+                      "description": "访问令牌过期时间（秒）"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "请求参数验证失败",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "请求参数验证失败",
+                      "description": "错误消息"
+                    },
+                    "details": {
+                      "type": "string",
+                      "example": "用户名不能为空",
+                      "description": "详细错误信息"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "用户名或密码错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "用户名或密码错误",
+                      "description": "错误消息"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "服务器内部错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "服务器内部错误",
+                      "description": "错误消息"
+                    },
+                    "details": {
+                      "type": "string",
+                      "example": "详细错误信息（仅开发环境）",
+                      "description": "详细错误信息（仅开发环境）"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/refresh": {
+      "post": {
+        "summary": "刷新访问令牌",
+        "description": "使用过期的或有效的令牌获取新的访问令牌。令牌即使过期也可以用于刷新。",
+        "tags": [
+          "Authentication"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "token"
+                ],
+                "properties": {
+                  "token": {
+                    "type": "string",
+                    "description": "过期的或有效的访问令牌",
+                    "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "令牌刷新成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true,
+                      "description": "操作是否成功"
+                    },
+                    "token": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+                      "description": "新的访问令牌（7天有效期）"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "请求参数错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": false,
+                      "description": "操作是否成功"
+                    },
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "string",
+                          "example": "INVALID_REQUEST",
+                          "description": "错误代码"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Token is required",
+                          "description": "错误消息"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "令牌无效",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": false,
+                      "description": "操作是否成功"
+                    },
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "string",
+                          "example": "INVALID_TOKEN",
+                          "description": "错误代码"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Invalid token",
+                          "description": "错误消息"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "服务器内部错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": false,
+                      "description": "操作是否成功"
+                    },
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "string",
+                          "example": "INTERNAL_ERROR",
+                          "description": "错误代码"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Internal server error",
+                          "description": "错误消息"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/register": {
+      "post": {
+        "summary": "用户注册",
+        "description": "创建一个新的用户账号。用户名和邮箱必须唯一。",
+        "tags": [
+          "Authentication"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "username",
+                  "password",
+                  "email"
+                ],
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "minLength": 3,
+                    "maxLength": 20,
+                    "pattern": "^[a-zA-Z0-9_]+$",
+                    "description": "用户名（3-20个字符，只能包含字母、数字和下划线）",
+                    "example": "john_doe"
+                  },
+                  "password": {
+                    "type": "string",
+                    "minLength": 3,
+                    "maxLength": 100,
+                    "description": "密码（至少3个字符）",
+                    "example": "password123"
+                  },
+                  "displayName": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 50,
+                    "description": "显示名称（可选，默认使用用户名）",
+                    "example": "John Doe"
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email",
+                    "maxLength": 100,
+                    "description": "邮箱地址",
+                    "example": "john@example.com"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "用户注册成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "user": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "example": "1",
+                          "description": "用户ID"
+                        },
+                        "username": {
+                          "type": "string",
+                          "example": "john_doe",
+                          "description": "用户名"
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "example": "John Doe",
+                          "description": "显示名称"
+                        },
+                        "email": {
+                          "type": "string",
+                          "format": "email",
+                          "example": "john@example.com",
+                          "description": "邮箱地址"
+                        },
+                        "avatar": {
+                          "type": "string",
+                          "example": "",
+                          "description": "头像URL"
+                        },
+                        "status": {
+                          "type": "string",
+                          "example": "active",
+                          "description": "用户状态"
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "format": "date-time",
+                          "example": "2025-01-28T00:00:00.000Z",
+                          "description": "创建时间"
+                        }
+                      }
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "用户注册成功",
+                      "description": "操作成功消息"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "请求参数验证失败",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "请求参数验证失败",
+                      "description": "错误消息"
+                    },
+                    "details": {
+                      "type": "string",
+                      "example": "用户名至少需要3个字符",
+                      "description": "详细错误信息"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "用户名或邮箱已存在",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "用户名 \"john_doe\" 已存在",
+                      "description": "错误消息"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "服务器内部错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "服务器内部错误",
+                      "description": "错误消息"
+                    },
+                    "details": {
+                      "type": "string",
+                      "example": "详细错误信息（仅开发环境）",
+                      "description": "详细错误信息（仅开发环境）"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/send-code": {
+      "post": {
+        "summary": "发送短信验证码",
+        "description": "向指定手机号发送短信验证码。POC阶段为Mock实现，验证码会在控制台输出并返回在响应中。",
+        "tags": [
+          "Authentication"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "phone"
+                ],
+                "properties": {
+                  "phone": {
+                    "type": "string",
+                    "description": "手机号码",
+                    "example": "13800138000"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "验证码发送成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true,
+                      "description": "操作是否成功"
+                    },
+                    "code": {
+                      "type": "string",
+                      "example": "123456",
+                      "description": "验证码（POC阶段返回，生产环境不应返回）"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "请求参数验证失败",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": false,
+                      "description": "操作是否成功"
+                    },
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "string",
+                          "example": "INVALID_REQUEST",
+                          "description": "错误代码"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "手机号码格式不正确",
+                          "description": "错误消息"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "服务器内部错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": false,
+                      "description": "操作是否成功"
+                    },
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "string",
+                          "example": "INTERNAL_ERROR",
+                          "description": "错误代码"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "发送验证码失败",
+                          "description": "错误消息"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/verify-code": {
+      "post": {
+        "summary": "验证码登录/注册",
+        "description": "使用手机号和验证码进行登录。首次登录会自动创建用户账号。",
+        "tags": [
+          "Authentication"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "phone",
+                  "code"
+                ],
+                "properties": {
+                  "phone": {
+                    "type": "string",
+                    "description": "手机号码",
+                    "example": "13800138000"
+                  },
+                  "code": {
+                    "type": "string",
+                    "description": "短信验证码",
+                    "example": "123456"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "登录/注册成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true,
+                      "description": "操作是否成功"
+                    },
+                    "user": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "example": "1",
+                          "description": "用户ID"
+                        },
+                        "phone": {
+                          "type": "string",
+                          "example": "13800138000",
+                          "description": "手机号码"
+                        },
+                        "nickname": {
+                          "type": "string",
+                          "example": "用户8000",
+                          "description": "用户昵称"
+                        },
+                        "gender": {
+                          "type": "string",
+                          "nullable": true,
+                          "example": "male",
+                          "description": "性别"
+                        },
+                        "preferences": {
+                          "type": "object",
+                          "nullable": true,
+                          "description": "用户偏好设置"
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "format": "date-time",
+                          "example": "2025-01-28T00:00:00.000Z",
+                          "description": "创建时间"
+                        }
+                      }
+                    },
+                    "token": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+                      "description": "访问令牌"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "请求参数验证失败或验证码错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": false,
+                      "description": "操作是否成功"
+                    },
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "string",
+                          "example": "INVALID_CODE",
+                          "description": "错误代码"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "验证码错误",
+                          "description": "错误消息"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "服务器内部错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": false,
+                      "description": "操作是否成功"
+                    },
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "string",
+                          "example": "INTERNAL_ERROR",
+                          "description": "错误代码"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "登录失败",
+                          "description": "错误消息"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users": {
+      "get": {
+        "summary": "获取用户列表",
+        "description": "支持关键词搜索和分页查询用户列表。关键词可匹配用户名或邮箱。",
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "name": "keyword",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "搜索关键词（可匹配用户名或邮箱）"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "1"
+            },
+            "description": "页码（从1开始）"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "20"
+            },
+            "description": "每页数量（1-100）"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功获取用户列表",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "users": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number",
+                                "example": 1,
+                                "description": "用户ID"
+                              },
+                              "username": {
+                                "type": "string",
+                                "example": "john_doe",
+                                "description": "用户名"
+                              },
+                              "displayName": {
+                                "type": "string",
+                                "example": "John Doe",
+                                "description": "显示名称"
+                              },
+                              "email": {
+                                "type": "string",
+                                "example": "john@example.com",
+                                "description": "邮箱地址"
+                              },
+                              "department": {
+                                "type": "string",
+                                "nullable": true,
+                                "example": "技术部",
+                                "description": "部门"
+                              },
+                              "status": {
+                                "type": "string",
+                                "enum": [
+                                  "active",
+                                  "inactive",
+                                  "suspended"
+                                ],
+                                "example": "active",
+                                "description": "用户状态"
+                              }
+                            }
+                          }
+                        },
+                        "total": {
+                          "type": "number",
+                          "example": 100,
+                          "description": "总用户数"
+                        },
+                        "page": {
+                          "type": "number",
+                          "example": 1,
+                          "description": "当前页码"
+                        },
+                        "pageSize": {
+                          "type": "number",
+                          "example": 20,
+                          "description": "每页数量"
+                        },
+                        "totalPages": {
+                          "type": "number",
+                          "example": 5,
+                          "description": "总页数"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "请求参数验证失败",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "查询参数验证失败"
+                    },
+                    "error": {
+                      "type": "string",
+                      "example": "page: 页码必须大于0"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "服务器内部错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "服务器内部错误"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "创建新用户",
+        "description": "创建一个新的用户账号。用户名和邮箱必须唯一。",
+        "tags": [
+          "Users"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "username",
+                  "password",
+                  "displayName",
+                  "email"
+                ],
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "minLength": 3,
+                    "maxLength": 50,
+                    "pattern": "^[a-zA-Z0-9_]+$",
+                    "description": "用户名（3-50个字符，只能包含字母、数字和下划线）",
+                    "example": "john_doe"
+                  },
+                  "password": {
+                    "type": "string",
+                    "minLength": 6,
+                    "maxLength": 100,
+                    "description": "密码（至少6个字符）",
+                    "example": "password123"
+                  },
+                  "displayName": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 50,
+                    "description": "显示名称",
+                    "example": "John Doe"
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email",
+                    "maxLength": 100,
+                    "description": "邮箱地址",
+                    "example": "john@example.com"
+                  },
+                  "phone": {
+                    "type": "string",
+                    "maxLength": 20,
+                    "pattern": "^[0-9-+()\\\\s]*$",
+                    "description": "手机号码（可选）",
+                    "example": "+86 13800138000"
+                  },
+                  "department": {
+                    "type": "string",
+                    "maxLength": 50,
+                    "description": "部门名称（可选）",
+                    "example": "技术部"
+                  },
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "active",
+                      "inactive",
+                      "suspended"
+                    ],
+                    "default": "active",
+                    "description": "用户状态",
+                    "example": "active"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "用户创建成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number",
+                          "example": 1,
+                          "description": "新创建的用户ID"
+                        },
+                        "username": {
+                          "type": "string",
+                          "example": "john_doe",
+                          "description": "用户名"
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "example": "John Doe",
+                          "description": "显示名称"
+                        },
+                        "email": {
+                          "type": "string",
+                          "example": "john@example.com",
+                          "description": "邮箱地址"
+                        },
+                        "department": {
+                          "type": "string",
+                          "nullable": true,
+                          "example": "技术部",
+                          "description": "部门"
+                        },
+                        "phone": {
+                          "type": "string",
+                          "nullable": true,
+                          "example": "+86 13800138000",
+                          "description": "手机号码"
+                        },
+                        "status": {
+                          "type": "string",
+                          "enum": [
+                            "active",
+                            "inactive",
+                            "suspended"
+                          ],
+                          "example": "active",
+                          "description": "用户状态"
+                        }
+                      }
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "用户创建成功",
+                      "description": "操作成功消息"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "请求参数验证失败或用户已存在",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "用户名 \"john_doe\" 已存在"
+                    },
+                    "error": {
+                      "type": "string",
+                      "example": "username: 用户名至少3个字符"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "服务器内部错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "服务器内部错误"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {}
+}

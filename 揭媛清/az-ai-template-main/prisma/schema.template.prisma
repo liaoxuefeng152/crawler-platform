@@ -1,0 +1,110 @@
+// Prisma Schema Template for MongoDB
+// 深瞳AI Coding 数据库模型模板
+//
+// 📝 使用说明：
+// 1. 此文件是模板文件，请勿直接修改 prisma/schema.prisma
+// 2. 添加新表时，只需在此文件中定义模型
+// 3. 运行 `npm run generate:schema` 自动生成带前缀的 schema
+// 4. 运行 `npm run db:migrate:prefix` 自动迁移数据库表名
+//
+// 🎯 表名规则：
+// - 模板中的 @@map("table_name") 会被自动替换为 @@map("{PROJECT_TABLE_PREFIX}-table_name")
+// - 例如：项目名为 test1，则 @@map("users") → @@map("test1-users")
+// - 前缀由项目目录名决定（运行 node scripts/sync-project-prefix.js 自动配置）
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================
+// 登录用户模型（从 login.json 迁移）
+// ============================================
+model LoginUser {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  username    String   @unique
+  password    String
+  displayName String
+  email       String   @unique
+  avatar      String   @default("")
+  status      String   @default("active") // active, inactive, suspended
+  department  String?
+  phone       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("login_users")
+}
+
+// ============================================
+// 用户模型（从 users.json 迁移）
+// ============================================
+model User {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  phone     String   @unique
+  nickname  String
+  avatar    String   @default("")
+  status    String   @default("active")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}
+
+// ============================================
+// 爬虫任务相关模型
+// ============================================
+
+// 爬虫基础任务表
+model CrawlerTask {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  taskId      String   @unique  // 任务ID（业务标识）
+  urls        String            // 网址列表（JSON数组）
+  status      String   @default("pending") // pending, running, completed, failed, stopped
+  logs        String?           // 日志记录（JSON数组）
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  completedAt DateTime?
+
+  // MD文件信息
+  mdFilePath   String?  // MD文件存储路径
+  mdFileName   String?  // MD文件名称
+  mdContent    String?  // MD内容（存储到MongoDB）
+
+  @@map("crawler_tasks")
+}
+
+// 主字段表
+model MainField {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  fieldId     String   @unique  // 字段ID（业务标识）
+  name        String            // 字段名称
+  description String?           // 字段解释
+  taskId      String            // 所属任务ID
+  mdPosition  String?           // 来源MD位置
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("main_fields")
+}
+
+// 子字段表
+model SubField {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  subFieldId    String   @unique  // 子字段ID（业务标识）
+  name          String            // 子字段名称
+  description   String?           // 子字段解释
+  value         String?           // 提取值
+  valueType     String   @default("text") // text, number, time, array
+  parentFieldId String            // 所属主字段ID
+  taskId        String            // 所属任务ID
+  mdPosition    String?           // 来源MD位置
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@map("sub_fields")
+}

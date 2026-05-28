@@ -1,0 +1,29 @@
+{
+  "workflow": "",
+  "version": "2.0",
+  "startTime": null,
+  "lastUpdate": null,
+  "endTime": null,
+  "currentStage": "Plan",
+  "currentSubstage": "",
+  "stagesCompleted": [],
+  "stageStatus": {},
+  "isBlocked": false,
+  "blockers": [],
+  "reworkHistory": [],
+  "autoContinue": true,
+  "maxReworkIterations": 5,
+  "qualityMetrics": {
+    "testPassRate": "0%",
+    "backendTestPassRate": "0%",
+    "closureRate": "0%",
+    "buildSuccess": false,
+    "typeCheckErrors": 0,
+    "ssrErrors": 0,
+    "qaPassed": false
+  },
+  "finalReport": null,
+  "deliverables": [],
+  "status": "initialized",
+  "completionMessage": null
+}

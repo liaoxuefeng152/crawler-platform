@@ -1,0 +1,52 @@
+{
+  "mcpServers": {
+    "shadcn": {
+      "command": "npx",
+      "args": [
+        "shadcn@latest",
+        "mcp"
+      ]
+    },
+    "chrome-devtools": {
+      "command": "npx",
+      "args": [
+        "chrome-devtools-mcp@latest"
+      ],
+      "env": {
+        "CHROME_EXECUTABLE": "/usr/bin/chromium-browser",
+        "CHROME_ARGS": "--no-sandbox --headless --disable-gpu --disable-dev-shm-usage"
+      }
+    },
+    "sequential-thinking": {
+      "command": "npx",
+      "args": [
+        "@modelcontextprotocol/server-sequential-thinking"
+      ]
+    },
+    "next-devtools": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "next-devtools-mcp@latest"
+      ],
+      "env": {
+        "NEXT_PUBLIC_PROJECT_ROOT": "/home/gms/work-space/template"
+      }
+    },
+    "openapi-docs": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "apifox-mcp-server@latest",
+        "--oas=openapi.json"
+      ],
+      "description": "OpenAPI documentation server"
+    },
+    "mcpServers": {
+      "svar-mcp": {
+        "type": "http",
+        "url": "https://docs.svar.dev/mcp"
+      }
+    }
+  }
+}
