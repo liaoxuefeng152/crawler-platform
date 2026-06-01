@@ -1,0 +1,34 @@
+# 爬虫项目依赖包
+
+# 网络请求
+requests>=2.28.0
+aiohttp>=3.8.0
+
+# HTML解析
+beautifulsoup4>=4.12.0
+lxml>=4.9.0
+
+# HTML转Markdown
+markdownify>=0.11.0
+html2text>=2020.1.16
+
+# MongoDB
+pymongo>=4.3.0
+
+# 配置文件解析
+pyyaml>=6.0
+pydantic>=2.0.0
+
+# CLI界面
+rich>=13.0.0
+click>=8.1.0
+
+# AI API调用
+openai>=1.0.0
+
+# 工具库
+python-dateutil>=2.8.0
+chardet>=5.0.0
+
+# 异步支持
+asyncio>=3.4.3
