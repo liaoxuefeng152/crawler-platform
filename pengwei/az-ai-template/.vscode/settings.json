@@ -1,0 +1,18 @@
+{
+  "typescript.preferences.includePackageJsonAutoImports": "auto",
+  "typescript.suggest.autoImports": true,
+  "typescript.workspaceSymbols.scope": "allOpenProjects",
+  "typescript.preferences.quoteStyle": "double",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "typescript.referencesCodeLens.enabled": true,
+  "typescript.suggest.completeFunctionCalls": true,
+  "files.associations": {
+    "*.tsx": "typescriptreact"
+  },
+  "typescript.tsserver.experimental.enableProjectDiagnostics": true,
+  "typescript.tsserver.watchOptions": {
+    "watchFile": "useFsEvents",
+    "watchDirectory": "useFsEvents",
+    "fallbackPolling": "dynamicPriorityPolling"
+  }
+}

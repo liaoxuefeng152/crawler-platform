@@ -1,0 +1,94 @@
+// ============================================
+// Prisma Schema for MongoDB
+// 深瞳AI Coding 数据库模型
+//
+// 🤖 自动生成文件，请勿手动修改
+// 📝 源文件：prisma/schema.template.prisma
+// 🎯 项目前缀：az-ai-template
+// 🕐 生成时间：2026-04-02T06:14:42.205Z
+// ============================================
+
+// Prisma Schema Template for MongoDB
+// 深瞳AI Coding 数据库模型模板
+//
+// 📝 使用说明：
+// 1. 此文件是模板文件，请勿直接修改 prisma/schema.prisma
+// 2. 添加新表时，只需在此文件中定义模型
+// 3. 运行 `npm run generate:schema` 自动生成带前缀的 schema
+// 4. 运行 `npm run db:migrate:prefix` 自动迁移数据库表名
+//
+// 🎯 表名规则：
+// - 模板中的 @@map("table_name") 会被自动替换为 @@map("{PROJECT_TABLE_PREFIX}-table_name")
+// - 例如：项目名为 test1，则 @@map("users") → @@map("test1-users")
+// - 前缀由项目目录名决定（运行 node scripts/sync-project-prefix.js 自动配置）
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================
+// 登录用户模型（从 login.json 迁移）
+// ============================================
+model LoginUser {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  username    String   @unique
+  password    String
+  displayName String
+  email       String   @unique
+  avatar      String   @default("")
+  status      String   @default("active") // active, inactive, suspended
+  department  String?
+  phone       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("az-ai-template-login_users")
+}
+
+// ============================================
+// 用户模型（从 users.json 迁移）
+// ============================================
+model User {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  phone     String   @unique
+  nickname  String
+  avatar    String   @default("")
+  status    String   @default("active")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("az-ai-template-users")
+}
+
+// ============================================
+// 📝 添加新模型示例（未来开发时参考）
+// ============================================
+//
+// model Project {
+//   id          String   @id @default(auto()) @map("_id") @db.ObjectId
+//   name        String
+//   description String?
+//   ownerId     String   @db.ObjectId
+//   createdAt   DateTime @default(now())
+//   updatedAt   DateTime @updatedAt
+//
+//   @@map("projects")  // 会自动生成为：{PROJECT_TABLE_PREFIX}-projects
+// }
+//
+// model Task {
+//   id          String   @id @default(auto()) @map("_id") @db.ObjectId
+//   title       String
+//   description String?
+//   projectId   String   @db.ObjectId
+//   assigneeId  String?  @db.ObjectId
+//   status      String   @default("pending")
+//   createdAt   DateTime @default(now())
+//   updatedAt   DateTime @updatedAt
+//
+//   @@map("tasks")  // 会自动生成为：{PROJECT_TABLE_PREFIX}-tasks
+// }
