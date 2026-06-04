@@ -1,0 +1,62 @@
+%% ============================================================================
+%% # 用户故事时序图 Example: US-03 查看借款人文件
+%% ============================================================================
+%%
+%% 【类型】: 文件操作（三栏布局）
+%% 【适用场景】:
+%%   - 文件预览 + 关联数据展示
+%%   - 文件分类筛选（按后缀tag分类）
+%%   - 本地搜索（前端本地处理）
+%%   - 文件与字段的双向关联
+%%
+%% 【关键特征】:
+%%   - Step数量: 4（适中，涵盖文件操作完整流程）
+%%   - 参与者数量: 4（User, Platform, DB, MinIO）
+%%   - 特殊结构: 无loop，但有本地处理标注
+%%
+%% 【学习要点】:
+%%   1. 文件操作中MinIO的角色（获取预签名URL）
+%%   2. 本地筛选的标注方式（Platform->>Platform: 基于已加载数据筛选）
+%%   3. 文件与字段的关联查询（GET /api/files/{fileId}/fields）
+%%   4. API复用设计：字段溯源API可在不同用户故事中复用
+%%   5. 完整闭环：用户点击字段后文件预览跳转到对应位置并高亮
+%%
+%% 【约束验证】:
+%%   ✅ Step ≤ 7  ✅ Participant ≤ 5  ✅ API格式规范  ✅ 响应精简
+%%
+%% ============================================================================
+
+sequenceDiagram
+    autonumber
+    participant User as 用户
+    participant Platform as 个贷处置平台
+    participant DB as MongoDB
+    participant MinIO as MinIO存储
+
+    Note over User,MinIO: Step 1: 进入文件查看页（三栏布局）
+
+    User->>Platform: 点击借款人详情"查看文件"
+    Platform->>DB: GET /api/debtors/{id}/files
+    DB-->>Platform: 返回借款人文件列表
+    Platform-->>User: 显示三栏布局页面，顶部文件列表按tag分类展示
+
+    Note over User,MinIO: Step 2: 文件搜索与分类筛选（前端本地处理）
+
+    User->>Platform: 输入关键词或选择文件类型tag
+    Platform->>Platform: 基于已加载的文件列表进行本地筛选
+    Platform-->>User: 更新顶部文件列表
+
+    Note over User,MinIO: Step 3: 选择文件查看
+
+    User->>Platform: 点击选中某个文件
+    Platform->>MinIO: 获取文件预签名URL
+    MinIO-->>Platform: 返回临时URL
+    Platform->>DB: GET /api/files/{fileId}/fields
+    DB-->>Platform: 返回该文件溯源的字段列表
+    Platform-->>User: 中间栏展示文件预览，左栏展示该文件对应的溯源字段
+
+    Note over User,MinIO: Step 4: 字段溯源定位
+
+    User->>Platform: 点击左栏某个字段
+    Platform->>Platform: 定位到文件中字段位置
+    Platform-->>User: 中间栏文件预览跳转到对应位置，高亮显示

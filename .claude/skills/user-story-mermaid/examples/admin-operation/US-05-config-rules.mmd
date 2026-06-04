@@ -1,0 +1,67 @@
+%% ============================================================================
+%% # 用户故事时序图 Example: US-05 配置数据规则
+%% ============================================================================
+%%
+%% 【类型】: 管理员操作（CRUD配置）
+%% 【适用场景】:
+%%   - 管理员配置系统规则
+%%   - 创建配置 + 编辑配置内容
+%%   - JSON格式配置编辑
+%%   - 管理员权限下的数据管理
+%%
+%% 【关键特征】:
+%%   - Step数量: 4（适中）
+%%   - 参与者数量: 3（Admin, Platform, DB）- 最小化
+%%   - 特殊结构: 无，纯同步流程
+%%
+%% 【学习要点】:
+%%   1. 管理员角色的标准命名（participant Admin as 管理员）
+%%   2. 配置创建的两阶段流程（创建基本信息→编辑配置内容）
+%%   3. PUT请求用于配置内容更新
+%%   4. 配置详情查看的闭环设计
+%%   5. 完整闭环：管理员看到配置详情展示
+%%
+%% 【约束验证】:
+%%   ✅ Step ≤ 7  ✅ Participant ≤ 5  ✅ API格式规范  ✅ 响应精简
+%%
+%% ============================================================================
+
+sequenceDiagram
+    autonumber
+    participant User as 管理员
+    participant Platform as 个贷处置平台
+    participant DB as MongoDB
+
+    Note over User,DB: Step 1: 查看数据规则配置列表
+
+    User->>Platform: 打开数据规则配置页面
+    Platform->>DB: GET /api/dataset-configs
+    DB-->>Platform: 返回配置列表
+    Platform-->>User: 展示数据规则配置列表
+
+    Note over User,DB: Step 2: 创建数据规则配置
+
+    User->>Platform: 点击"新增配置"
+    Platform-->>User: 打开配置创建对话框
+    User->>Platform: 填写配置信息（名称、描述）
+    Platform->>DB: POST /api/dataset-configs
+    DB-->>Platform: 返回配置ID和key
+    Platform-->>User: 创建成功，返回配置列表
+
+    Note over User,DB: Step 3: 编辑配置内容
+
+    User->>Platform: 点击编辑配置内容
+    Platform->>DB: GET /api/dataset-configs/{id}
+    DB-->>Platform: 返回配置详情
+    Platform-->>User: 打开配置编辑器
+    User->>Platform: 编辑字段提取规则（JSON格式）
+    Platform->>DB: PUT /api/dataset-configs/{id}
+    DB-->>Platform: 保存成功
+    Platform-->>User: 更新成功提示
+
+    Note over User,DB: Step 4: 查看数据规则详情
+
+    User->>Platform: 点击查看数据规则详情
+    Platform->>DB: GET /api/dataset-configs/{id}
+    DB-->>Platform: 返回数据规则完整信息
+    Platform-->>User: 展示数据规则详情（名称、描述、配置内容、创建时间等）

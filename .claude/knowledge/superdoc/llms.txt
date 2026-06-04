@@ -1,0 +1,586 @@
+# SuperDoc
+
+## Docs
+
+- [AGENTS](https://docs.superdoc.dev/AGENTS.md)
+- [Configuration](https://docs.superdoc.dev/ai/ai-actions/configuration.md)
+- [Hooks](https://docs.superdoc.dev/ai/ai-actions/hooks.md)
+- [Methods](https://docs.superdoc.dev/ai/ai-actions/methods.md)
+- [AI Actions](https://docs.superdoc.dev/ai/ai-actions/overview.md)
+- [AI Builder](https://docs.superdoc.dev/ai/ai-builder/overview.md)
+- [Authentication](https://docs.superdoc.dev/api-reference/authentication.md)
+- [Register](https://docs.superdoc.dev/api-reference/authentication/register.md): Start here! Register with your email to get a verification code.
+- [Verify](https://docs.superdoc.dev/api-reference/authentication/verify.md): Complete registration by submitting your verification code.          ## Returns Your API key (also sent to your email for safekeeping)          ## Security We don't store keys in plain text - save yours securely.
+- [Annotate](https://docs.superdoc.dev/api-reference/documents/annotate.md): Populate fields inside a DOCX template using SuperDoc annotations.
+- [Convert](https://docs.superdoc.dev/api-reference/documents/convert.md): Convert documents between formats.
+- [Our Backend Services](https://docs.superdoc.dev/api-reference/introduction.md)
+- [Quick Start](https://docs.superdoc.dev/api-reference/quickstart.md)
+- [Sign](https://docs.superdoc.dev/api-reference/signature/sign.md): Sign a PDF or DOCX document with a cryptographic signature.
+- [Health Check](https://docs.superdoc.dev/api-reference/system/health-check.md): Check API availability. No authentication required. Returns 200 when healthy.
+- [Verify](https://docs.superdoc.dev/api-reference/verification/verify.md): Verify the signature and integrity of a signed PDF.
+- [Configuration](https://docs.superdoc.dev/core/react/configuration.md)
+- [Methods](https://docs.superdoc.dev/core/react/methods.md)
+- [React API](https://docs.superdoc.dev/core/react/overview.md)
+- [Types](https://docs.superdoc.dev/core/react/types.md)
+- [Configuration](https://docs.superdoc.dev/core/superdoc/configuration.md)
+- [Events](https://docs.superdoc.dev/core/superdoc/events.md)
+- [Methods](https://docs.superdoc.dev/core/superdoc/methods.md)
+- [SuperDoc API](https://docs.superdoc.dev/core/superdoc/overview.md)
+- [Surfaces](https://docs.superdoc.dev/core/superdoc/surfaces.md)
+- [Configuration](https://docs.superdoc.dev/core/supereditor/configuration.md)
+- [Events](https://docs.superdoc.dev/core/supereditor/events.md)
+- [Methods](https://docs.superdoc.dev/core/supereditor/methods.md)
+- [SuperEditor API](https://docs.superdoc.dev/core/supereditor/overview.md)
+- [Available operations](https://docs.superdoc.dev/document-api/available-operations.md): All Document API operations and their editor method mappings
+- [Common workflows](https://docs.superdoc.dev/document-api/common-workflows.md): Recommended patterns for working with the Document API
+- [Document API](https://docs.superdoc.dev/document-api/overview.md): A stable, engine-agnostic interface for programmatic document access
+- [authorities.configure](https://docs.superdoc.dev/document-api/reference/authorities/configure.md): Update the configuration of an existing table-of-authorities block.
+- [authorities.entries.get](https://docs.superdoc.dev/document-api/reference/authorities/entries-get.md): Get detailed information about a specific TA authority entry.
+- [authorities.entries.insert](https://docs.superdoc.dev/document-api/reference/authorities/entries-insert.md): Insert a new TA authority entry field at a target location.
+- [authorities.entries.list](https://docs.superdoc.dev/document-api/reference/authorities/entries-list.md): List all TA (authority entry) fields in the document.
+- [authorities.entries.remove](https://docs.superdoc.dev/document-api/reference/authorities/entries-remove.md): Remove a TA authority entry field from the document.
+- [authorities.entries.update](https://docs.superdoc.dev/document-api/reference/authorities/entries-update.md): Update the properties of an existing TA authority entry.
+- [authorities.get](https://docs.superdoc.dev/document-api/reference/authorities/get.md): Get detailed information about a specific table-of-authorities block.
+- [Table of Authorities operations](https://docs.superdoc.dev/document-api/reference/authorities/index.md): Table of Authorities operation reference from the canonical Document API contract.
+- [authorities.insert](https://docs.superdoc.dev/document-api/reference/authorities/insert.md): Insert a new table-of-authorities block at a target location.
+- [authorities.list](https://docs.superdoc.dev/document-api/reference/authorities/list.md): List all table-of-authorities blocks in the document.
+- [authorities.rebuild](https://docs.superdoc.dev/document-api/reference/authorities/rebuild.md): Rebuild a table-of-authorities block from its entries.
+- [authorities.remove](https://docs.superdoc.dev/document-api/reference/authorities/remove.md): Remove a table-of-authorities block from the document.
+- [blocks.delete](https://docs.superdoc.dev/document-api/reference/blocks/delete.md): Delete an entire block node (paragraph, heading, list item, table, image, or sdt) deterministically.
+- [blocks.deleteRange](https://docs.superdoc.dev/document-api/reference/blocks/delete-range.md): Delete a contiguous range of top-level blocks between two endpoints (inclusive). Both endpoints must be direct children of the document node. Supports dry-run preview.
+- [Blocks operations](https://docs.superdoc.dev/document-api/reference/blocks/index.md): Blocks operation reference from the canonical Document API contract.
+- [blocks.list](https://docs.superdoc.dev/document-api/reference/blocks/list.md): List top-level blocks in document order with IDs, types, and text previews. Supports pagination via offset/limit and optional nodeType filtering.
+- [bookmarks.get](https://docs.superdoc.dev/document-api/reference/bookmarks/get.md): Get detailed information about a specific bookmark.
+- [Bookmarks operations](https://docs.superdoc.dev/document-api/reference/bookmarks/index.md): Bookmarks operation reference from the canonical Document API contract.
+- [bookmarks.insert](https://docs.superdoc.dev/document-api/reference/bookmarks/insert.md): Insert a new named bookmark at a target location.
+- [bookmarks.list](https://docs.superdoc.dev/document-api/reference/bookmarks/list.md): List all bookmarks in the document.
+- [bookmarks.remove](https://docs.superdoc.dev/document-api/reference/bookmarks/remove.md): Remove a bookmark from the document.
+- [bookmarks.rename](https://docs.superdoc.dev/document-api/reference/bookmarks/rename.md): Rename an existing bookmark.
+- [capabilities.get](https://docs.superdoc.dev/document-api/reference/capabilities/get.md): Query runtime capabilities supported by the current document engine.
+- [Capabilities operations](https://docs.superdoc.dev/document-api/reference/capabilities/index.md): Capabilities operation reference from the canonical Document API contract.
+- [captions.configure](https://docs.superdoc.dev/document-api/reference/captions/configure.md): Configure numbering format for a caption label.
+- [captions.get](https://docs.superdoc.dev/document-api/reference/captions/get.md): Get detailed information about a specific caption paragraph.
+- [Captions operations](https://docs.superdoc.dev/document-api/reference/captions/index.md): Captions operation reference from the canonical Document API contract.
+- [captions.insert](https://docs.superdoc.dev/document-api/reference/captions/insert.md): Insert a new caption paragraph adjacent to a target block.
+- [captions.list](https://docs.superdoc.dev/document-api/reference/captions/list.md): List all caption paragraphs in the document.
+- [captions.remove](https://docs.superdoc.dev/document-api/reference/captions/remove.md): Remove a caption paragraph from the document.
+- [captions.update](https://docs.superdoc.dev/document-api/reference/captions/update.md): Update the text of an existing caption paragraph.
+- [citations.bibliography.configure](https://docs.superdoc.dev/document-api/reference/citations/bibliography-configure.md): Configure the bibliography style.
+- [citations.bibliography.get](https://docs.superdoc.dev/document-api/reference/citations/bibliography-get.md): Get information about the bibliography block.
+- [citations.bibliography.insert](https://docs.superdoc.dev/document-api/reference/citations/bibliography-insert.md): Insert a bibliography block at a target location.
+- [citations.bibliography.rebuild](https://docs.superdoc.dev/document-api/reference/citations/bibliography-rebuild.md): Rebuild the bibliography from current sources.
+- [citations.bibliography.remove](https://docs.superdoc.dev/document-api/reference/citations/bibliography-remove.md): Remove the bibliography block from the document.
+- [citations.get](https://docs.superdoc.dev/document-api/reference/citations/get.md): Get detailed information about a specific citation mark.
+- [Citations operations](https://docs.superdoc.dev/document-api/reference/citations/index.md): Citations operation reference from the canonical Document API contract.
+- [citations.insert](https://docs.superdoc.dev/document-api/reference/citations/insert.md): Insert a new citation mark at a target location.
+- [citations.list](https://docs.superdoc.dev/document-api/reference/citations/list.md): List all citation marks in the document.
+- [citations.remove](https://docs.superdoc.dev/document-api/reference/citations/remove.md): Remove a citation mark from the document.
+- [citations.sources.get](https://docs.superdoc.dev/document-api/reference/citations/sources-get.md): Get detailed information about a specific citation source.
+- [citations.sources.insert](https://docs.superdoc.dev/document-api/reference/citations/sources-insert.md): Register a new citation source in the document store.
+- [citations.sources.list](https://docs.superdoc.dev/document-api/reference/citations/sources-list.md): List all citation sources in the document store.
+- [citations.sources.remove](https://docs.superdoc.dev/document-api/reference/citations/sources-remove.md): Remove a citation source from the document store.
+- [citations.sources.update](https://docs.superdoc.dev/document-api/reference/citations/sources-update.md): Update the fields of an existing citation source.
+- [citations.update](https://docs.superdoc.dev/document-api/reference/citations/update.md): Update an existing citation mark's source references.
+- [clearContent](https://docs.superdoc.dev/document-api/reference/clear-content.md): Clear all document body content, leaving a single empty paragraph.
+- [comments.create](https://docs.superdoc.dev/document-api/reference/comments/create.md): Create a new comment thread (or reply when parentCommentId is given).
+- [comments.delete](https://docs.superdoc.dev/document-api/reference/comments/delete.md): Remove a comment or reply by ID.
+- [comments.get](https://docs.superdoc.dev/document-api/reference/comments/get.md): Retrieve a single comment thread by ID.
+- [Comments operations](https://docs.superdoc.dev/document-api/reference/comments/index.md): Comments operation reference from the canonical Document API contract.
+- [comments.list](https://docs.superdoc.dev/document-api/reference/comments/list.md): List all comment threads in the document.
+- [comments.patch](https://docs.superdoc.dev/document-api/reference/comments/patch.md): Patch fields on an existing comment (text, target, status, or isInternal).
+- [contentControls.appendContent](https://docs.superdoc.dev/document-api/reference/content-controls/append-content.md): Append content to the end of a content control.
+- [contentControls.checkbox.getState](https://docs.superdoc.dev/document-api/reference/content-controls/checkbox/get-state.md): Get the checked state of a checkbox content control.
+- [contentControls.checkbox.setState](https://docs.superdoc.dev/document-api/reference/content-controls/checkbox/set-state.md): Set the checked state of a checkbox content control.
+- [contentControls.checkbox.setSymbolPair](https://docs.superdoc.dev/document-api/reference/content-controls/checkbox/set-symbol-pair.md): Set the checked and unchecked symbol glyphs for a checkbox content control.
+- [contentControls.checkbox.toggle](https://docs.superdoc.dev/document-api/reference/content-controls/checkbox/toggle.md): Toggle the checked state of a checkbox content control.
+- [contentControls.choiceList.getItems](https://docs.superdoc.dev/document-api/reference/content-controls/choice-list/get-items.md): Get the list items and selected value of a comboBox or dropDownList content control.
+- [contentControls.choiceList.setItems](https://docs.superdoc.dev/document-api/reference/content-controls/choice-list/set-items.md): Replace the list items of a comboBox or dropDownList content control.
+- [contentControls.choiceList.setSelected](https://docs.superdoc.dev/document-api/reference/content-controls/choice-list/set-selected.md): Set the selected value of a comboBox or dropDownList content control.
+- [contentControls.clearBinding](https://docs.superdoc.dev/document-api/reference/content-controls/clear-binding.md): Remove data binding metadata from a content control.
+- [contentControls.clearContent](https://docs.superdoc.dev/document-api/reference/content-controls/clear-content.md): Clear all content inside a content control, leaving it empty.
+- [contentControls.copy](https://docs.superdoc.dev/document-api/reference/content-controls/copy.md): Copy a content control to a destination position. Copied SDTs receive new IDs.
+- [create.contentControl](https://docs.superdoc.dev/document-api/reference/content-controls/create.md): Create a new content control (SDT) in the document.
+- [contentControls.date.clearValue](https://docs.superdoc.dev/document-api/reference/content-controls/date/clear-value.md): Clear the date value of a date content control.
+- [contentControls.date.setCalendar](https://docs.superdoc.dev/document-api/reference/content-controls/date/set-calendar.md): Set the calendar type for a date content control.
+- [contentControls.date.setDisplayFormat](https://docs.superdoc.dev/document-api/reference/content-controls/date/set-display-format.md): Set the display format string for a date content control.
+- [contentControls.date.setDisplayLocale](https://docs.superdoc.dev/document-api/reference/content-controls/date/set-display-locale.md): Set the display locale for a date content control.
+- [contentControls.date.setStorageFormat](https://docs.superdoc.dev/document-api/reference/content-controls/date/set-storage-format.md): Set the XML storage format for a date content control.
+- [contentControls.date.setValue](https://docs.superdoc.dev/document-api/reference/content-controls/date/set-value.md): Set the date value of a date content control.
+- [contentControls.delete](https://docs.superdoc.dev/document-api/reference/content-controls/delete.md): Delete a content control and its content from the document.
+- [contentControls.get](https://docs.superdoc.dev/document-api/reference/content-controls/get.md): Retrieve a single content control by target.
+- [contentControls.getBinding](https://docs.superdoc.dev/document-api/reference/content-controls/get-binding.md): Get the data binding metadata (w:dataBinding) of a content control.
+- [contentControls.getContent](https://docs.superdoc.dev/document-api/reference/content-controls/get-content.md): Get the text content of a content control.
+- [contentControls.getParent](https://docs.superdoc.dev/document-api/reference/content-controls/get-parent.md): Get the parent content control of the target, if any.
+- [contentControls.getRawProperties](https://docs.superdoc.dev/document-api/reference/content-controls/get-raw-properties.md): Get the raw sdtPr properties of a content control as a passthrough hash.
+- [contentControls.group.ungroup](https://docs.superdoc.dev/document-api/reference/content-controls/group/ungroup.md): Remove the group designation from a group content control.
+- [contentControls.group.wrap](https://docs.superdoc.dev/document-api/reference/content-controls/group/wrap.md): Wrap a content control inside a new group content control. Always nests; not idempotent.
+- [Content Controls operations](https://docs.superdoc.dev/document-api/reference/content-controls/index.md): Content Controls operation reference from the canonical Document API contract.
+- [contentControls.insertAfter](https://docs.superdoc.dev/document-api/reference/content-controls/insert-after.md): Insert content immediately after a content control.
+- [contentControls.insertBefore](https://docs.superdoc.dev/document-api/reference/content-controls/insert-before.md): Insert content immediately before a content control.
+- [contentControls.list](https://docs.superdoc.dev/document-api/reference/content-controls/list.md): List all content controls in the document with optional type/tag filtering.
+- [contentControls.listChildren](https://docs.superdoc.dev/document-api/reference/content-controls/list-children.md): List direct child content controls nested inside the target.
+- [contentControls.listInRange](https://docs.superdoc.dev/document-api/reference/content-controls/list-in-range.md): List content controls within a block range.
+- [contentControls.move](https://docs.superdoc.dev/document-api/reference/content-controls/move.md): Move a content control to a new position. Preserves original IDs.
+- [contentControls.normalizeTagPayload](https://docs.superdoc.dev/document-api/reference/content-controls/normalize-tag-payload.md): Normalize a content control tag between plain-string and JSON-encoded formats.
+- [contentControls.normalizeWordCompatibility](https://docs.superdoc.dev/document-api/reference/content-controls/normalize-word-compatibility.md): Normalize a content control to resolve Word compatibility issues.
+- [contentControls.patch](https://docs.superdoc.dev/document-api/reference/content-controls/patch.md): Patch metadata properties on a content control (tag, alias, appearance, color, etc.).
+- [contentControls.patchRawProperties](https://docs.superdoc.dev/document-api/reference/content-controls/patch-raw-properties.md): Apply raw XML-level patches to the sdtPr subtree of a content control.
+- [contentControls.prependContent](https://docs.superdoc.dev/document-api/reference/content-controls/prepend-content.md): Prepend content to the beginning of a content control.
+- [contentControls.repeatingSection.cloneItem](https://docs.superdoc.dev/document-api/reference/content-controls/repeating-section/clone-item.md): Clone a repeating section item at the given index. Cloned SDTs receive new IDs.
+- [contentControls.repeatingSection.deleteItem](https://docs.superdoc.dev/document-api/reference/content-controls/repeating-section/delete-item.md): Delete a repeating section item at the given index.
+- [contentControls.repeatingSection.insertItemAfter](https://docs.superdoc.dev/document-api/reference/content-controls/repeating-section/insert-item-after.md): Insert a new item after a specific index in a repeating section.
+- [contentControls.repeatingSection.insertItemBefore](https://docs.superdoc.dev/document-api/reference/content-controls/repeating-section/insert-item-before.md): Insert a new item before a specific index in a repeating section.
+- [contentControls.repeatingSection.listItems](https://docs.superdoc.dev/document-api/reference/content-controls/repeating-section/list-items.md): List the repeating section items inside a repeating section content control.
+- [contentControls.repeatingSection.setAllowInsertDelete](https://docs.superdoc.dev/document-api/reference/content-controls/repeating-section/set-allow-insert-delete.md): Set the allowInsertDelete flag on a repeating section.
+- [contentControls.replaceContent](https://docs.superdoc.dev/document-api/reference/content-controls/replace-content.md): Replace the entire content of a content control.
+- [contentControls.selectByTag](https://docs.superdoc.dev/document-api/reference/content-controls/select-by-tag.md): Select content controls matching a specific tag value.
+- [contentControls.selectByTitle](https://docs.superdoc.dev/document-api/reference/content-controls/select-by-title.md): Select content controls matching a specific title (alias) value.
+- [contentControls.setBinding](https://docs.superdoc.dev/document-api/reference/content-controls/set-binding.md): Set data binding metadata on a content control.
+- [contentControls.setLockMode](https://docs.superdoc.dev/document-api/reference/content-controls/set-lock-mode.md): Set the lock mode on a content control.
+- [contentControls.setType](https://docs.superdoc.dev/document-api/reference/content-controls/set-type.md): Transition a content control to a different semantic type. Metadata-only; no implicit content rewrite.
+- [contentControls.text.clearValue](https://docs.superdoc.dev/document-api/reference/content-controls/text/clear-value.md): Clear the text value of a plain-text content control.
+- [contentControls.text.setMultiline](https://docs.superdoc.dev/document-api/reference/content-controls/text/set-multiline.md): Set or clear the multiline attribute on a plain-text content control.
+- [contentControls.text.setValue](https://docs.superdoc.dev/document-api/reference/content-controls/text/set-value.md): Set the text value of a plain-text content control.
+- [contentControls.unwrap](https://docs.superdoc.dev/document-api/reference/content-controls/unwrap.md): Remove the content control wrapper, preserving its content in place.
+- [contentControls.validateWordCompatibility](https://docs.superdoc.dev/document-api/reference/content-controls/validate-word-compatibility.md): Validate a content control for Word compatibility issues.
+- [contentControls.wrap](https://docs.superdoc.dev/document-api/reference/content-controls/wrap.md): Wrap existing content with a new content control.
+- [Core operations](https://docs.superdoc.dev/document-api/reference/core/index.md): Core operation reference from the canonical Document API contract.
+- [create.heading](https://docs.superdoc.dev/document-api/reference/create/heading.md): Create a new heading at the target position.
+- [create.image](https://docs.superdoc.dev/document-api/reference/create/image.md): Insert a new image at the target position.
+- [Create operations](https://docs.superdoc.dev/document-api/reference/create/index.md): Create operation reference from the canonical Document API contract.
+- [create.paragraph](https://docs.superdoc.dev/document-api/reference/create/paragraph.md): Create a standalone paragraph at the target position. To add a list item, use lists.insert instead.
+- [create.sectionBreak](https://docs.superdoc.dev/document-api/reference/create/section-break.md): Create a section break at the target location with optional initial section properties.
+- [create.table](https://docs.superdoc.dev/document-api/reference/create/table.md): Create a new table at the target position.
+- [create.tableOfContents](https://docs.superdoc.dev/document-api/reference/create/table-of-contents.md): Insert a new table of contents at the target position.
+- [crossRefs.get](https://docs.superdoc.dev/document-api/reference/cross-refs/get.md): Get detailed information about a specific cross-reference field.
+- [Cross-References operations](https://docs.superdoc.dev/document-api/reference/cross-refs/index.md): Cross-References operation reference from the canonical Document API contract.
+- [crossRefs.insert](https://docs.superdoc.dev/document-api/reference/cross-refs/insert.md): Insert a new cross-reference field at a target location.
+- [crossRefs.list](https://docs.superdoc.dev/document-api/reference/cross-refs/list.md): List all cross-reference fields in the document.
+- [crossRefs.rebuild](https://docs.superdoc.dev/document-api/reference/cross-refs/rebuild.md): Rebuild (recalculate) a cross-reference field.
+- [crossRefs.remove](https://docs.superdoc.dev/document-api/reference/cross-refs/remove.md): Remove a cross-reference field from the document.
+- [delete](https://docs.superdoc.dev/document-api/reference/delete.md): Delete content at a contiguous document selection. Accepts a SelectionTarget or mutation-ready ref. Supports cross-block deletion and optional block-edge expansion via behavior mode.
+- [diff.apply](https://docs.superdoc.dev/document-api/reference/diff/apply.md): Apply a previously computed diff payload to the current document. The document fingerprint must match the diff base fingerprint. Tracked mode governs body content only; styles, numbering, and comments are always applied directly.
+- [diff.capture](https://docs.superdoc.dev/document-api/reference/diff/capture.md): Capture the current document's diffable state as a versioned snapshot. v1 covers body, comments, styles, and numbering. Header/footer content is not included.
+- [diff.compare](https://docs.superdoc.dev/document-api/reference/diff/compare.md): Compare the current document (base) against a previously captured target snapshot. Returns a versioned diff payload describing the changes from base to target.
+- [Diff operations](https://docs.superdoc.dev/document-api/reference/diff/index.md): Diff operation reference from the canonical Document API contract.
+- [fields.get](https://docs.superdoc.dev/document-api/reference/fields/get.md): Get detailed information about a specific field.
+- [Fields operations](https://docs.superdoc.dev/document-api/reference/fields/index.md): Fields operation reference from the canonical Document API contract.
+- [fields.insert](https://docs.superdoc.dev/document-api/reference/fields/insert.md): Insert a raw field code at a target location.
+- [fields.list](https://docs.superdoc.dev/document-api/reference/fields/list.md): List all fields in the document.
+- [fields.rebuild](https://docs.superdoc.dev/document-api/reference/fields/rebuild.md): Rebuild (recalculate) a field.
+- [fields.remove](https://docs.superdoc.dev/document-api/reference/fields/remove.md): Remove a field from the document.
+- [find](https://docs.superdoc.dev/document-api/reference/find.md): Search the document for text or node matches using SDM/1 selectors. Returns discovery-grade results — for mutation targeting, use query.match instead.
+- [footnotes.configure](https://docs.superdoc.dev/document-api/reference/footnotes/configure.md): Configure numbering and placement for footnotes or endnotes.
+- [footnotes.get](https://docs.superdoc.dev/document-api/reference/footnotes/get.md): Get detailed information about a specific footnote or endnote.
+- [Footnotes operations](https://docs.superdoc.dev/document-api/reference/footnotes/index.md): Footnotes operation reference from the canonical Document API contract.
+- [footnotes.insert](https://docs.superdoc.dev/document-api/reference/footnotes/insert.md): Insert a new footnote or endnote at a target location.
+- [footnotes.list](https://docs.superdoc.dev/document-api/reference/footnotes/list.md): List all footnotes and endnotes in the document.
+- [footnotes.remove](https://docs.superdoc.dev/document-api/reference/footnotes/remove.md): Remove a footnote or endnote from the document.
+- [footnotes.update](https://docs.superdoc.dev/document-api/reference/footnotes/update.md): Update the content of an existing footnote or endnote.
+- [format.apply](https://docs.superdoc.dev/document-api/reference/format/apply.md): Apply inline run-property patch changes to the target range with explicit set/clear semantics.
+- [format.bCs](https://docs.superdoc.dev/document-api/reference/format/b-cs.md): Set or clear the `bCs` inline run property on the target text range.
+- [format.bold](https://docs.superdoc.dev/document-api/reference/format/bold.md): Set or clear the `bold` inline run property on the target text range.
+- [format.border](https://docs.superdoc.dev/document-api/reference/format/border.md): Set or clear the `border` inline run property on the target text range.
+- [format.caps](https://docs.superdoc.dev/document-api/reference/format/caps.md): Set or clear the `caps` inline run property on the target text range.
+- [format.charScale](https://docs.superdoc.dev/document-api/reference/format/char-scale.md): Set or clear the `charScale` inline run property on the target text range.
+- [format.color](https://docs.superdoc.dev/document-api/reference/format/color.md): Set or clear the `color` inline run property on the target text range.
+- [format.contextualAlternates](https://docs.superdoc.dev/document-api/reference/format/contextual-alternates.md): Set or clear the `contextualAlternates` inline run property on the target text range.
+- [format.cs](https://docs.superdoc.dev/document-api/reference/format/cs.md): Set or clear the `cs` inline run property on the target text range.
+- [format.dstrike](https://docs.superdoc.dev/document-api/reference/format/dstrike.md): Set or clear the `dstrike` inline run property on the target text range.
+- [format.eastAsianLayout](https://docs.superdoc.dev/document-api/reference/format/east-asian-layout.md): Set or clear the `eastAsianLayout` inline run property on the target text range.
+- [format.em](https://docs.superdoc.dev/document-api/reference/format/em.md): Set or clear the `em` inline run property on the target text range.
+- [format.emboss](https://docs.superdoc.dev/document-api/reference/format/emboss.md): Set or clear the `emboss` inline run property on the target text range.
+- [format.fitText](https://docs.superdoc.dev/document-api/reference/format/fit-text.md): Set or clear the `fitText` inline run property on the target text range.
+- [format.fontFamily](https://docs.superdoc.dev/document-api/reference/format/font-family.md): Set or clear the `fontFamily` inline run property on the target text range.
+- [format.fontSize](https://docs.superdoc.dev/document-api/reference/format/font-size.md): Set or clear the `fontSize` inline run property on the target text range.
+- [format.fontSizeCs](https://docs.superdoc.dev/document-api/reference/format/font-size-cs.md): Set or clear the `fontSizeCs` inline run property on the target text range.
+- [format.highlight](https://docs.superdoc.dev/document-api/reference/format/highlight.md): Set or clear the `highlight` inline run property on the target text range.
+- [format.iCs](https://docs.superdoc.dev/document-api/reference/format/i-cs.md): Set or clear the `iCs` inline run property on the target text range.
+- [format.imprint](https://docs.superdoc.dev/document-api/reference/format/imprint.md): Set or clear the `imprint` inline run property on the target text range.
+- [Format operations](https://docs.superdoc.dev/document-api/reference/format/index.md): Format operation reference from the canonical Document API contract.
+- [format.italic](https://docs.superdoc.dev/document-api/reference/format/italic.md): Set or clear the `italic` inline run property on the target text range.
+- [format.kerning](https://docs.superdoc.dev/document-api/reference/format/kerning.md): Set or clear the `kerning` inline run property on the target text range.
+- [format.lang](https://docs.superdoc.dev/document-api/reference/format/lang.md): Set or clear the `lang` inline run property on the target text range.
+- [format.letterSpacing](https://docs.superdoc.dev/document-api/reference/format/letter-spacing.md): Set or clear the `letterSpacing` inline run property on the target text range.
+- [format.ligatures](https://docs.superdoc.dev/document-api/reference/format/ligatures.md): Set or clear the `ligatures` inline run property on the target text range.
+- [format.numForm](https://docs.superdoc.dev/document-api/reference/format/num-form.md): Set or clear the `numForm` inline run property on the target text range.
+- [format.numSpacing](https://docs.superdoc.dev/document-api/reference/format/num-spacing.md): Set or clear the `numSpacing` inline run property on the target text range.
+- [format.oMath](https://docs.superdoc.dev/document-api/reference/format/o-math.md): Set or clear the `oMath` inline run property on the target text range.
+- [format.outline](https://docs.superdoc.dev/document-api/reference/format/outline.md): Set or clear the `outline` inline run property on the target text range.
+- [format.paragraph.clearAlignment](https://docs.superdoc.dev/document-api/reference/format/paragraph/clear-alignment.md): Remove direct paragraph alignment, reverting to style-defined or default alignment.
+- [format.paragraph.clearAllTabStops](https://docs.superdoc.dev/document-api/reference/format/paragraph/clear-all-tab-stops.md): Remove all tab stops from a paragraph.
+- [format.paragraph.clearBorder](https://docs.superdoc.dev/document-api/reference/format/paragraph/clear-border.md): Remove border for a specific side or all sides of a paragraph.
+- [format.paragraph.clearDirection](https://docs.superdoc.dev/document-api/reference/format/paragraph/clear-direction.md): Remove explicit paragraph direction, reverting to inherited or default (LTR).
+- [format.paragraph.clearIndentation](https://docs.superdoc.dev/document-api/reference/format/paragraph/clear-indentation.md): Remove all direct paragraph indentation.
+- [format.paragraph.clearShading](https://docs.superdoc.dev/document-api/reference/format/paragraph/clear-shading.md): Remove all paragraph shading.
+- [format.paragraph.clearSpacing](https://docs.superdoc.dev/document-api/reference/format/paragraph/clear-spacing.md): Remove all direct paragraph spacing.
+- [format.paragraph.clearTabStop](https://docs.superdoc.dev/document-api/reference/format/paragraph/clear-tab-stop.md): Remove a tab stop at a given position.
+- [Paragraph Formatting operations](https://docs.superdoc.dev/document-api/reference/format/paragraph/index.md): Paragraph Formatting operation reference from the canonical Document API contract.
+- [format.paragraph.resetDirectFormatting](https://docs.superdoc.dev/document-api/reference/format/paragraph/reset-direct-formatting.md): Strip all direct paragraph formatting while preserving style reference, numbering, and section metadata.
+- [format.paragraph.setAlignment](https://docs.superdoc.dev/document-api/reference/format/paragraph/set-alignment.md): Set paragraph alignment (justification) on a paragraph-like block.
+- [format.paragraph.setBorder](https://docs.superdoc.dev/document-api/reference/format/paragraph/set-border.md): Set border properties for a specific side of a paragraph.
+- [format.paragraph.setDirection](https://docs.superdoc.dev/document-api/reference/format/paragraph/set-direction.md): Set paragraph base direction (LTR or RTL via w:bidi). Optionally align text to match.
+- [format.paragraph.setFlowOptions](https://docs.superdoc.dev/document-api/reference/format/paragraph/set-flow-options.md): Set contextual spacing, page-break-before, and suppress-auto-hyphens flags.
+- [format.paragraph.setIndentation](https://docs.superdoc.dev/document-api/reference/format/paragraph/set-indentation.md): Set paragraph indentation properties (left, right, firstLine, hanging) in twips.
+- [format.paragraph.setKeepOptions](https://docs.superdoc.dev/document-api/reference/format/paragraph/set-keep-options.md): Set keep-with-next, keep-lines-together, and widow/orphan control flags.
+- [format.paragraph.setOutlineLevel](https://docs.superdoc.dev/document-api/reference/format/paragraph/set-outline-level.md): Set the paragraph outline level (0–9) or null to clear.
+- [format.paragraph.setShading](https://docs.superdoc.dev/document-api/reference/format/paragraph/set-shading.md): Set paragraph shading (background fill, pattern color, pattern type).
+- [format.paragraph.setSpacing](https://docs.superdoc.dev/document-api/reference/format/paragraph/set-spacing.md): Set paragraph spacing properties (before, after, line, lineRule) in twips.
+- [format.paragraph.setTabStop](https://docs.superdoc.dev/document-api/reference/format/paragraph/set-tab-stop.md): Add or replace a tab stop at a given position.
+- [format.position](https://docs.superdoc.dev/document-api/reference/format/position.md): Set or clear the `position` inline run property on the target text range.
+- [format.rFonts](https://docs.superdoc.dev/document-api/reference/format/r-fonts.md): Set or clear the `rFonts` inline run property on the target text range.
+- [format.rStyle](https://docs.superdoc.dev/document-api/reference/format/r-style.md): Set or clear the `rStyle` inline run property on the target text range.
+- [format.rtl](https://docs.superdoc.dev/document-api/reference/format/rtl.md): Set or clear the `rtl` inline run property on the target text range. This does not change paragraph direction; use `format.paragraph.setDirection` for paragraph-level RTL.
+- [format.shading](https://docs.superdoc.dev/document-api/reference/format/shading.md): Set or clear the `shading` inline run property on the target text range.
+- [format.shadow](https://docs.superdoc.dev/document-api/reference/format/shadow.md): Set or clear the `shadow` inline run property on the target text range.
+- [format.smallCaps](https://docs.superdoc.dev/document-api/reference/format/small-caps.md): Set or clear the `smallCaps` inline run property on the target text range.
+- [format.snapToGrid](https://docs.superdoc.dev/document-api/reference/format/snap-to-grid.md): Set or clear the `snapToGrid` inline run property on the target text range.
+- [format.specVanish](https://docs.superdoc.dev/document-api/reference/format/spec-vanish.md): Set or clear the `specVanish` inline run property on the target text range.
+- [format.strike](https://docs.superdoc.dev/document-api/reference/format/strike.md): Set or clear the `strike` inline run property on the target text range.
+- [format.stylisticSets](https://docs.superdoc.dev/document-api/reference/format/stylistic-sets.md): Set or clear the `stylisticSets` inline run property on the target text range.
+- [format.underline](https://docs.superdoc.dev/document-api/reference/format/underline.md): Set or clear the `underline` inline run property on the target text range.
+- [format.vanish](https://docs.superdoc.dev/document-api/reference/format/vanish.md): Set or clear the `vanish` inline run property on the target text range.
+- [format.vertAlign](https://docs.superdoc.dev/document-api/reference/format/vert-align.md): Set or clear the `vertAlign` inline run property on the target text range.
+- [format.webHidden](https://docs.superdoc.dev/document-api/reference/format/web-hidden.md): Set or clear the `webHidden` inline run property on the target text range.
+- [get](https://docs.superdoc.dev/document-api/reference/get.md): Read the full document as an SDDocument structure.
+- [getHtml](https://docs.superdoc.dev/document-api/reference/get-html.md): Extract the document content as an HTML string.
+- [getMarkdown](https://docs.superdoc.dev/document-api/reference/get-markdown.md): Extract the document content as a Markdown string.
+- [getNode](https://docs.superdoc.dev/document-api/reference/get-node.md): Retrieve a single node by target position.
+- [getNodeById](https://docs.superdoc.dev/document-api/reference/get-node-by-id.md): Retrieve a single node by its unique ID.
+- [getText](https://docs.superdoc.dev/document-api/reference/get-text.md): Extract the plain-text content of the document.
+- [headerFooters.get](https://docs.superdoc.dev/document-api/reference/header-footers/get.md): Get a single header/footer slot entry by address.
+- [Headers & Footers operations](https://docs.superdoc.dev/document-api/reference/header-footers/index.md): Headers & Footers operation reference from the canonical Document API contract.
+- [headerFooters.list](https://docs.superdoc.dev/document-api/reference/header-footers/list.md): List header/footer slot entries across sections.
+- [headerFooters.parts.create](https://docs.superdoc.dev/document-api/reference/header-footers/parts/create.md): Create a new independent header/footer part, optionally cloned from an existing part.
+- [headerFooters.parts.delete](https://docs.superdoc.dev/document-api/reference/header-footers/parts/delete.md): Delete a header/footer part and its associated relationship when no section slots reference it.
+- [headerFooters.parts.list](https://docs.superdoc.dev/document-api/reference/header-footers/parts/list.md): List unique header/footer part records from document relationships.
+- [headerFooters.refs.clear](https://docs.superdoc.dev/document-api/reference/header-footers/refs/clear.md): Clear an explicit header/footer reference from a section slot.
+- [headerFooters.refs.set](https://docs.superdoc.dev/document-api/reference/header-footers/refs/set.md): Set an explicit header/footer reference on a section slot.
+- [headerFooters.refs.setLinkedToPrevious](https://docs.superdoc.dev/document-api/reference/header-footers/refs/set-linked-to-previous.md): Link or unlink a header/footer slot to/from the previous section.
+- [headerFooters.resolve](https://docs.superdoc.dev/document-api/reference/header-footers/resolve.md): Resolve the effective header/footer reference for a slot, walking the section inheritance chain.
+- [history.get](https://docs.superdoc.dev/document-api/reference/history/get.md): Query the current undo/redo history state of the active editor.
+- [History operations](https://docs.superdoc.dev/document-api/reference/history/index.md): History operation reference from the canonical Document API contract.
+- [history.redo](https://docs.superdoc.dev/document-api/reference/history/redo.md): Redo the most recently undone action in the active editor.
+- [history.undo](https://docs.superdoc.dev/document-api/reference/history/undo.md): Undo the most recent history-safe mutation in the active editor.
+- [hyperlinks.get](https://docs.superdoc.dev/document-api/reference/hyperlinks/get.md): Retrieve details of a specific hyperlink by its inline address.
+- [Hyperlinks operations](https://docs.superdoc.dev/document-api/reference/hyperlinks/index.md): Hyperlinks operation reference from the canonical Document API contract.
+- [hyperlinks.insert](https://docs.superdoc.dev/document-api/reference/hyperlinks/insert.md): Insert new linked text at a target position.
+- [hyperlinks.list](https://docs.superdoc.dev/document-api/reference/hyperlinks/list.md): List all hyperlinks in the document, with optional filtering by href, anchor, or display text.
+- [hyperlinks.patch](https://docs.superdoc.dev/document-api/reference/hyperlinks/patch.md): Update hyperlink metadata (destination, tooltip, target, rel) without changing display text.
+- [hyperlinks.remove](https://docs.superdoc.dev/document-api/reference/hyperlinks/remove.md): Remove a hyperlink. Mode 'unwrap' preserves display text; 'deleteText' removes the linked content entirely.
+- [hyperlinks.wrap](https://docs.superdoc.dev/document-api/reference/hyperlinks/wrap.md): Wrap an existing text range with a hyperlink.
+- [images.convertToFloating](https://docs.superdoc.dev/document-api/reference/images/convert-to-floating.md): Convert an inline image to floating placement.
+- [images.convertToInline](https://docs.superdoc.dev/document-api/reference/images/convert-to-inline.md): Convert a floating image to inline placement.
+- [images.crop](https://docs.superdoc.dev/document-api/reference/images/crop.md): Apply rectangular edge-percentage crop to an image.
+- [images.delete](https://docs.superdoc.dev/document-api/reference/images/delete.md): Delete an image from the document.
+- [images.flip](https://docs.superdoc.dev/document-api/reference/images/flip.md): Set horizontal and/or vertical flip state for an image.
+- [images.get](https://docs.superdoc.dev/document-api/reference/images/get.md): Get details for a specific image by its stable ID.
+- [Images operations](https://docs.superdoc.dev/document-api/reference/images/index.md): Images operation reference from the canonical Document API contract.
+- [images.insertCaption](https://docs.superdoc.dev/document-api/reference/images/insert-caption.md): Insert a caption paragraph below the image.
+- [images.list](https://docs.superdoc.dev/document-api/reference/images/list.md): List all images in the document.
+- [images.move](https://docs.superdoc.dev/document-api/reference/images/move.md): Move an image to a new location in the document.
+- [images.removeCaption](https://docs.superdoc.dev/document-api/reference/images/remove-caption.md): Remove the caption paragraph from below the image.
+- [images.replaceSource](https://docs.superdoc.dev/document-api/reference/images/replace-source.md): Replace the image source while preserving identity and placement.
+- [images.resetCrop](https://docs.superdoc.dev/document-api/reference/images/reset-crop.md): Remove all cropping from an image.
+- [images.rotate](https://docs.superdoc.dev/document-api/reference/images/rotate.md): Set the absolute rotation angle for an image.
+- [images.scale](https://docs.superdoc.dev/document-api/reference/images/scale.md): Scale an image by a uniform factor applied to both dimensions.
+- [images.setAltText](https://docs.superdoc.dev/document-api/reference/images/set-alt-text.md): Set the accessibility description (alt text) for an image.
+- [images.setAnchorOptions](https://docs.superdoc.dev/document-api/reference/images/set-anchor-options.md): Set anchor behavior options for a floating image.
+- [images.setDecorative](https://docs.superdoc.dev/document-api/reference/images/set-decorative.md): Mark or unmark an image as decorative.
+- [images.setHyperlink](https://docs.superdoc.dev/document-api/reference/images/set-hyperlink.md): Set or remove the hyperlink attached to an image.
+- [images.setLockAspectRatio](https://docs.superdoc.dev/document-api/reference/images/set-lock-aspect-ratio.md): Lock or unlock the aspect ratio for an image.
+- [images.setName](https://docs.superdoc.dev/document-api/reference/images/set-name.md): Set the object name for an image.
+- [images.setPosition](https://docs.superdoc.dev/document-api/reference/images/set-position.md): Set the anchor position for a floating image.
+- [images.setSize](https://docs.superdoc.dev/document-api/reference/images/set-size.md): Set explicit width/height for an image.
+- [images.setWrapDistances](https://docs.superdoc.dev/document-api/reference/images/set-wrap-distances.md): Set the text-wrap distance margins for a floating image.
+- [images.setWrapSide](https://docs.superdoc.dev/document-api/reference/images/set-wrap-side.md): Set which side(s) text wraps around a floating image.
+- [images.setWrapType](https://docs.superdoc.dev/document-api/reference/images/set-wrap-type.md): Set the text wrapping type for a floating image.
+- [images.setZOrder](https://docs.superdoc.dev/document-api/reference/images/set-z-order.md): Set the z-order (relativeHeight) for a floating image.
+- [images.updateCaption](https://docs.superdoc.dev/document-api/reference/images/update-caption.md): Update the text of an existing caption paragraph.
+- [Document API reference](https://docs.superdoc.dev/document-api/reference/index.md): Operation reference from the canonical Document API contract.
+- [index.configure](https://docs.superdoc.dev/document-api/reference/index/configure.md): Update the configuration of an existing index block.
+- [index.entries.get](https://docs.superdoc.dev/document-api/reference/index/entries-get.md): Get detailed information about a specific XE index entry.
+- [index.entries.insert](https://docs.superdoc.dev/document-api/reference/index/entries-insert.md): Insert a new XE index entry field at a target location.
+- [index.entries.list](https://docs.superdoc.dev/document-api/reference/index/entries-list.md): List all XE (index entry) fields in the document.
+- [index.entries.remove](https://docs.superdoc.dev/document-api/reference/index/entries-remove.md): Remove an XE index entry field from the document.
+- [index.entries.update](https://docs.superdoc.dev/document-api/reference/index/entries-update.md): Update the properties of an existing XE index entry.
+- [index.get](https://docs.superdoc.dev/document-api/reference/index/get.md): Get detailed information about a specific index block.
+- [Index operations](https://docs.superdoc.dev/document-api/reference/index/index.md): Index operation reference from the canonical Document API contract.
+- [index.insert](https://docs.superdoc.dev/document-api/reference/index/insert.md): Insert a new index block at a target location.
+- [index.list](https://docs.superdoc.dev/document-api/reference/index/list.md): List all index blocks in the document.
+- [index.rebuild](https://docs.superdoc.dev/document-api/reference/index/rebuild.md): Rebuild (regenerate) an index block from its entries.
+- [index.remove](https://docs.superdoc.dev/document-api/reference/index/remove.md): Remove an index block from the document.
+- [info](https://docs.superdoc.dev/document-api/reference/info.md): Return document summary info including word, character, paragraph, heading, table, image, comment, tracked-change, SDT-field, list, and page counts, plus outline and capabilities.
+- [insert](https://docs.superdoc.dev/document-api/reference/insert.md): Insert content into the document. Two input shapes: text-based (value + type) inserts inline content at a SelectionTarget or ref position within an existing block; structural SDFragment (content) inserts one or more blocks as siblings relative to a BlockNodeAddress target. When target/ref is omitted…
+- [lists.applyPreset](https://docs.superdoc.dev/document-api/reference/lists/apply-preset.md): Apply a built-in list formatting preset to the target list.
+- [lists.applyStyle](https://docs.superdoc.dev/document-api/reference/lists/apply-style.md): Apply a reusable list style to the target list. Sequence-local: if the abstract definition is shared with other lists, it is cloned first to avoid affecting them.
+- [lists.applyTemplate](https://docs.superdoc.dev/document-api/reference/lists/apply-template.md): Advanced alias for lists.applyStyle. Apply a captured ListTemplate to the target list (abstract-scoped, no clone-on-write).
+- [lists.attach](https://docs.superdoc.dev/document-api/reference/lists/attach.md): Convert non-list paragraphs to list items under an existing list sequence.
+- [lists.canContinuePrevious](https://docs.superdoc.dev/document-api/reference/lists/can-continue-previous.md): Check whether the target sequence can continue numbering from a previous compatible sequence.
+- [lists.canJoin](https://docs.superdoc.dev/document-api/reference/lists/can-join.md): Check whether two adjacent list sequences can be joined.
+- [lists.captureTemplate](https://docs.superdoc.dev/document-api/reference/lists/capture-template.md): Advanced alias for lists.getStyle. Capture list formatting from the abstract definition only (does not merge lvlOverride formatting).
+- [lists.clearLevelOverrides](https://docs.superdoc.dev/document-api/reference/lists/clear-level-overrides.md): Remove instance-level overrides for a specific list level, restoring abstract definition values.
+- [lists.continuePrevious](https://docs.superdoc.dev/document-api/reference/lists/continue-previous.md): Continue numbering from the nearest compatible previous list sequence.
+- [lists.convertToText](https://docs.superdoc.dev/document-api/reference/lists/convert-to-text.md): Convert list items to plain paragraphs, optionally prepending the rendered marker text.
+- [lists.create](https://docs.superdoc.dev/document-api/reference/lists/create.md): Create a new list from one or more paragraphs. Supports optional preset or style for new sequences. When sequence.mode is "continuePrevious", preset and style are not allowed — the new items inherit formatting from the previous sequence.
+- [lists.detach](https://docs.superdoc.dev/document-api/reference/lists/detach.md): Remove numbering properties from list items, converting them to plain paragraphs.
+- [lists.get](https://docs.superdoc.dev/document-api/reference/lists/get.md): Retrieve a specific list node by target.
+- [lists.getStyle](https://docs.superdoc.dev/document-api/reference/lists/get-style.md): Read the effective reusable style of a list, including instance-level overrides. Returns a ListStyle that can be applied to other lists via lists.applyStyle.
+- [lists.indent](https://docs.superdoc.dev/document-api/reference/lists/indent.md): Increase the indentation level of a list item.
+- [Lists operations](https://docs.superdoc.dev/document-api/reference/lists/index.md): Lists operation reference from the canonical Document API contract.
+- [lists.insert](https://docs.superdoc.dev/document-api/reference/lists/insert.md): Insert a new list item before or after an existing list item. The new item inherits the target list context.
+- [lists.join](https://docs.superdoc.dev/document-api/reference/lists/join.md): Merge two adjacent list sequences into one.
+- [lists.list](https://docs.superdoc.dev/document-api/reference/lists/list.md): List all list nodes in the document, optionally filtered by scope.
+- [lists.outdent](https://docs.superdoc.dev/document-api/reference/lists/outdent.md): Decrease the indentation level of a list item.
+- [lists.restartAt](https://docs.superdoc.dev/document-api/reference/lists/restart-at.md): Restart numbering at the target list item with a specific value. If the item is mid-sequence, it is separated first.
+- [lists.separate](https://docs.superdoc.dev/document-api/reference/lists/separate.md): Split a list sequence at the target item, creating a new sequence from that point forward.
+- [lists.setLevel](https://docs.superdoc.dev/document-api/reference/lists/set-level.md): Set the absolute nesting level (0..8) of a list item.
+- [lists.setLevelAlignment](https://docs.superdoc.dev/document-api/reference/lists/set-level-alignment.md): Set the marker alignment (left, center, right) for a specific list level.
+- [lists.setLevelBullet](https://docs.superdoc.dev/document-api/reference/lists/set-level-bullet.md): Set the bullet marker text for a specific list level.
+- [lists.setLevelIndents](https://docs.superdoc.dev/document-api/reference/lists/set-level-indents.md): Set the paragraph indentation values (left, hanging, firstLine) for a specific list level.
+- [lists.setLevelLayout](https://docs.superdoc.dev/document-api/reference/lists/set-level-layout.md): Set the layout properties (alignment, indentation, trailing character, tab stop) for a specific list level. Accepts partial updates — omitted fields are left unchanged. Sequence-local: clones shared definitions.
+- [lists.setLevelMarkerFont](https://docs.superdoc.dev/document-api/reference/lists/set-level-marker-font.md): Set the font family used for the marker character at a specific list level.
+- [lists.setLevelNumberStyle](https://docs.superdoc.dev/document-api/reference/lists/set-level-number-style.md): Set the numbering style (e.g. decimal, lowerLetter, upperRoman) for a specific list level. Rejects "bullet" — use setLevelBullet instead. Sequence-local: clones shared definitions.
+- [lists.setLevelNumbering](https://docs.superdoc.dev/document-api/reference/lists/set-level-numbering.md): Advanced alias for lists.setLevelNumberStyle/setLevelText/setLevelStart. Set format, pattern, and start in one call (abstract-scoped, no clone-on-write).
+- [lists.setLevelPictureBullet](https://docs.superdoc.dev/document-api/reference/lists/set-level-picture-bullet.md): Set a picture bullet for a specific list level by its OOXML lvlPicBulletId.
+- [lists.setLevelRestart](https://docs.superdoc.dev/document-api/reference/lists/set-level-restart.md): Set the restart behavior for a specific list level.
+- [lists.setLevelStart](https://docs.superdoc.dev/document-api/reference/lists/set-level-start.md): Set the start value for a specific list level. Rejects bullet levels and non-positive values. Sequence-local: clones shared definitions.
+- [lists.setLevelText](https://docs.superdoc.dev/document-api/reference/lists/set-level-text.md): Set the level text pattern (e.g. "%1.", "(%1)") for a specific list level. Uses OOXML level-placeholder syntax. Sequence-local: clones shared definitions.
+- [lists.setLevelTrailingCharacter](https://docs.superdoc.dev/document-api/reference/lists/set-level-trailing-character.md): Set the trailing character (tab, space, nothing) after the marker for a specific list level.
+- [lists.setType](https://docs.superdoc.dev/document-api/reference/lists/set-type.md): Convert a list to ordered or bullet and merge adjacent compatible sequences to preserve continuous numbering.
+- [lists.setValue](https://docs.superdoc.dev/document-api/reference/lists/set-value.md): Set an explicit numbering value at the target item. Mid-sequence targets are atomically separated first.
+- [markdownToFragment](https://docs.superdoc.dev/document-api/reference/markdown-to-fragment.md): Convert a Markdown string into an SDM/1 structural fragment.
+- [mutations.apply](https://docs.superdoc.dev/document-api/reference/mutations/apply.md): Execute a mutation plan atomically against the document.
+- [Mutations operations](https://docs.superdoc.dev/document-api/reference/mutations/index.md): Mutations operation reference from the canonical Document API contract.
+- [mutations.preview](https://docs.superdoc.dev/document-api/reference/mutations/preview.md): Dry-run a mutation plan, returning resolved targets without applying changes.
+- [permissionRanges.create](https://docs.superdoc.dev/document-api/reference/permission-ranges/create.md): Create a permission range exception region in the document. Inserts matched permStart/permEnd markers at the target.
+- [permissionRanges.get](https://docs.superdoc.dev/document-api/reference/permission-ranges/get.md): Get detailed information about a specific permission range by ID.
+- [Permission Ranges operations](https://docs.superdoc.dev/document-api/reference/permission-ranges/index.md): Permission Ranges operation reference from the canonical Document API contract.
+- [permissionRanges.list](https://docs.superdoc.dev/document-api/reference/permission-ranges/list.md): List all permission ranges in the document. Returns only complete paired ranges (both start and end markers present).
+- [permissionRanges.remove](https://docs.superdoc.dev/document-api/reference/permission-ranges/remove.md): Remove a permission range by ID. Removes whichever markers exist for the given ID (start, end, or both).
+- [permissionRanges.updatePrincipal](https://docs.superdoc.dev/document-api/reference/permission-ranges/update-principal.md): Change which principal is allowed to edit a permission range. Updates the principal fields on the start marker.
+- [protection.clearEditingRestriction](https://docs.superdoc.dev/document-api/reference/protection/clear-editing-restriction.md): Disable document-level editing restriction by setting enforcement to off. Preserves the protection element and its metadata for round-trip fidelity.
+- [protection.get](https://docs.superdoc.dev/document-api/reference/protection/get.md): Read the current document protection state including editing restrictions, write protection, and read-only recommendation.
+- [Protection operations](https://docs.superdoc.dev/document-api/reference/protection/index.md): Protection operation reference from the canonical Document API contract.
+- [protection.setEditingRestriction](https://docs.superdoc.dev/document-api/reference/protection/set-editing-restriction.md): Enable Word-style editing restriction on the document. Only readOnly mode is supported in v1.
+- [Query operations](https://docs.superdoc.dev/document-api/reference/query/index.md): Query operation reference from the canonical Document API contract.
+- [query.match](https://docs.superdoc.dev/document-api/reference/query/match.md): Deterministic selector-based search returning mutation-grade addresses and text ranges. Use this to discover targets before any mutation.
+- [Ranges operations](https://docs.superdoc.dev/document-api/reference/ranges/index.md): Ranges operation reference from the canonical Document API contract.
+- [ranges.resolve](https://docs.superdoc.dev/document-api/reference/ranges/resolve.md): Resolve two explicit anchors into a contiguous document range. Returns a transparent SelectionTarget, a mutation-ready ref, and preview metadata. Stateless and deterministic.
+- [replace](https://docs.superdoc.dev/document-api/reference/replace.md): Replace content at a contiguous document selection. Text path accepts a SelectionTarget or ref plus replacement text. Structural path accepts a BlockNodeAddress (replaces whole block), SelectionTarget (expands to full covered block boundaries), or ref plus SDFragment content.
+- [sections.clearHeaderFooterRef](https://docs.superdoc.dev/document-api/reference/sections/clear-header-footer-ref.md): Clear a section header/footer reference for a specific variant.
+- [sections.clearPageBorders](https://docs.superdoc.dev/document-api/reference/sections/clear-page-borders.md): Clear page border configuration for a section.
+- [sections.get](https://docs.superdoc.dev/document-api/reference/sections/get.md): Retrieve full section information by section address.
+- [Sections operations](https://docs.superdoc.dev/document-api/reference/sections/index.md): Sections operation reference from the canonical Document API contract.
+- [sections.list](https://docs.superdoc.dev/document-api/reference/sections/list.md): List sections in deterministic order with section-target handles.
+- [sections.setBreakType](https://docs.superdoc.dev/document-api/reference/sections/set-break-type.md): Set the section break type.
+- [sections.setColumns](https://docs.superdoc.dev/document-api/reference/sections/set-columns.md): Set column configuration for a section.
+- [sections.setHeaderFooterMargins](https://docs.superdoc.dev/document-api/reference/sections/set-header-footer-margins.md): Set header/footer margin distances for a section.
+- [sections.setHeaderFooterRef](https://docs.superdoc.dev/document-api/reference/sections/set-header-footer-ref.md): Set or replace a section header/footer reference for a variant.
+- [sections.setLineNumbering](https://docs.superdoc.dev/document-api/reference/sections/set-line-numbering.md): Enable or configure line numbering for a section.
+- [sections.setLinkToPrevious](https://docs.superdoc.dev/document-api/reference/sections/set-link-to-previous.md): Set or clear link-to-previous behavior for a header/footer variant.
+- [sections.setOddEvenHeadersFooters](https://docs.superdoc.dev/document-api/reference/sections/set-odd-even-headers-footers.md): Enable or disable odd/even header-footer mode in document settings.
+- [sections.setPageBorders](https://docs.superdoc.dev/document-api/reference/sections/set-page-borders.md): Set page border configuration for a section.
+- [sections.setPageMargins](https://docs.superdoc.dev/document-api/reference/sections/set-page-margins.md): Set page-edge margins for a section.
+- [sections.setPageNumbering](https://docs.superdoc.dev/document-api/reference/sections/set-page-numbering.md): Set page numbering format/start for a section.
+- [sections.setPageSetup](https://docs.superdoc.dev/document-api/reference/sections/set-page-setup.md): Set page size/orientation properties for a section.
+- [sections.setSectionDirection](https://docs.superdoc.dev/document-api/reference/sections/set-section-direction.md): Set section text flow direction (LTR/RTL).
+- [sections.setTitlePage](https://docs.superdoc.dev/document-api/reference/sections/set-title-page.md): Enable or disable title-page behavior for a section.
+- [sections.setVerticalAlign](https://docs.superdoc.dev/document-api/reference/sections/set-vertical-align.md): Set vertical page alignment for a section.
+- [styles.apply](https://docs.superdoc.dev/document-api/reference/styles/apply.md): Apply document-level default style changes to the stylesheet (word/styles.xml). Targets docDefaults run and paragraph channels with set-style patch semantics.
+- [Styles operations](https://docs.superdoc.dev/document-api/reference/styles/index.md): Styles operation reference from the canonical Document API contract.
+- [styles.paragraph.clearStyle](https://docs.superdoc.dev/document-api/reference/styles/paragraph/clear-style.md): Remove the paragraph style reference from a paragraph-like block.
+- [Paragraph Styles operations](https://docs.superdoc.dev/document-api/reference/styles/paragraph/index.md): Paragraph Styles operation reference from the canonical Document API contract.
+- [styles.paragraph.setStyle](https://docs.superdoc.dev/document-api/reference/styles/paragraph/set-style.md): Apply a paragraph style (w:pStyle) to a paragraph-like block, clearing direct run formatting while preserving character-style references.
+- [tables.applyBorderPreset](https://docs.superdoc.dev/document-api/reference/tables/apply-border-preset.md): Apply a border preset (e.g. all borders, outside only) to a table.
+- [tables.applyStyle](https://docs.superdoc.dev/document-api/reference/tables/apply-style.md): Apply a table style and/or style options in one call.
+- [tables.clearBorder](https://docs.superdoc.dev/document-api/reference/tables/clear-border.md): Remove border formatting from a table or cell range.
+- [tables.clearCellSpacing](https://docs.superdoc.dev/document-api/reference/tables/clear-cell-spacing.md): Remove custom cell spacing from the target table.
+- [tables.clearContents](https://docs.superdoc.dev/document-api/reference/tables/clear-contents.md): Clear the contents of the target table or cell range.
+- [tables.clearDefaultStyle](https://docs.superdoc.dev/document-api/reference/tables/clear-default-style.md): Remove the document-level default table style setting.
+- [tables.clearShading](https://docs.superdoc.dev/document-api/reference/tables/clear-shading.md): Remove shading from a table or cell range.
+- [tables.clearStyle](https://docs.superdoc.dev/document-api/reference/tables/clear-style.md): Remove the applied table style, reverting to defaults.
+- [tables.convertFromText](https://docs.superdoc.dev/document-api/reference/tables/convert-from-text.md): Convert a text range into a table.
+- [tables.convertToText](https://docs.superdoc.dev/document-api/reference/tables/convert-to-text.md): Convert a table back to plain text.
+- [tables.delete](https://docs.superdoc.dev/document-api/reference/tables/delete.md): Delete the target table from the document.
+- [tables.deleteCell](https://docs.superdoc.dev/document-api/reference/tables/delete-cell.md): Delete a cell from a table row.
+- [tables.deleteColumn](https://docs.superdoc.dev/document-api/reference/tables/delete-column.md): Delete a column from the target table.
+- [tables.deleteRow](https://docs.superdoc.dev/document-api/reference/tables/delete-row.md): Delete a row from the target table.
+- [tables.distributeColumns](https://docs.superdoc.dev/document-api/reference/tables/distribute-columns.md): Distribute column widths evenly across the target table.
+- [tables.distributeRows](https://docs.superdoc.dev/document-api/reference/tables/distribute-rows.md): Distribute row heights evenly across the target table.
+- [tables.get](https://docs.superdoc.dev/document-api/reference/tables/get.md): Retrieve table structure and dimensions by locator.
+- [tables.getCells](https://docs.superdoc.dev/document-api/reference/tables/get-cells.md): Retrieve cell information for a table, optionally filtered by row or column.
+- [tables.getProperties](https://docs.superdoc.dev/document-api/reference/tables/get-properties.md): Retrieve layout and style properties of a table.
+- [tables.getStyles](https://docs.superdoc.dev/document-api/reference/tables/get-styles.md): List all table styles and the document-level default table style setting.
+- [Tables operations](https://docs.superdoc.dev/document-api/reference/tables/index.md): Tables operation reference from the canonical Document API contract.
+- [tables.insertCell](https://docs.superdoc.dev/document-api/reference/tables/insert-cell.md): Insert a new cell into a table row.
+- [tables.insertColumn](https://docs.superdoc.dev/document-api/reference/tables/insert-column.md): Insert a new column into the target table.
+- [tables.insertRow](https://docs.superdoc.dev/document-api/reference/tables/insert-row.md): Insert a new row into the target table.
+- [tables.mergeCells](https://docs.superdoc.dev/document-api/reference/tables/merge-cells.md): Merge a range of table cells into one.
+- [tables.move](https://docs.superdoc.dev/document-api/reference/tables/move.md): Move a table to a new position in the document.
+- [tables.setAltText](https://docs.superdoc.dev/document-api/reference/tables/set-alt-text.md): Set the alternative text description for a table.
+- [tables.setBorder](https://docs.superdoc.dev/document-api/reference/tables/set-border.md): Set border properties on a table or cell range.
+- [tables.setBorders](https://docs.superdoc.dev/document-api/reference/tables/set-borders.md): Set borders on a table using a target set or per-edge patch.
+- [tables.setCellPadding](https://docs.superdoc.dev/document-api/reference/tables/set-cell-padding.md): Set padding on a specific table cell or cell range.
+- [tables.setCellProperties](https://docs.superdoc.dev/document-api/reference/tables/set-cell-properties.md): Set properties on a table cell such as vertical alignment or text direction.
+- [tables.setCellSpacing](https://docs.superdoc.dev/document-api/reference/tables/set-cell-spacing.md): Set the cell spacing for the target table.
+- [tables.setColumnWidth](https://docs.superdoc.dev/document-api/reference/tables/set-column-width.md): Set the width of a table column.
+- [tables.setDefaultStyle](https://docs.superdoc.dev/document-api/reference/tables/set-default-style.md): Set the document-level default table style (w:defaultTableStyle in settings.xml).
+- [tables.setLayout](https://docs.superdoc.dev/document-api/reference/tables/set-layout.md): Set the layout mode of the target table.
+- [tables.setRowHeight](https://docs.superdoc.dev/document-api/reference/tables/set-row-height.md): Set the height of a table row.
+- [tables.setRowOptions](https://docs.superdoc.dev/document-api/reference/tables/set-row-options.md): Set options on a table row such as header repeat or page break.
+- [tables.setShading](https://docs.superdoc.dev/document-api/reference/tables/set-shading.md): Set the background shading color on a table or cell range.
+- [tables.setStyle](https://docs.superdoc.dev/document-api/reference/tables/set-style.md): Apply a named table style to the target table.
+- [tables.setStyleOption](https://docs.superdoc.dev/document-api/reference/tables/set-style-option.md): Toggle a conditional style option such as banded rows or first column.
+- [tables.setTableOptions](https://docs.superdoc.dev/document-api/reference/tables/set-table-options.md): Set table-level default cell margins and/or cell spacing.
+- [tables.setTablePadding](https://docs.superdoc.dev/document-api/reference/tables/set-table-padding.md): Set default cell padding for the entire table.
+- [tables.sort](https://docs.superdoc.dev/document-api/reference/tables/sort.md): Sort table rows by a column value.
+- [tables.split](https://docs.superdoc.dev/document-api/reference/tables/split.md): Split a table into two tables at the target row.
+- [tables.splitCell](https://docs.superdoc.dev/document-api/reference/tables/split-cell.md): Split a table cell into multiple cells.
+- [tables.unmergeCells](https://docs.superdoc.dev/document-api/reference/tables/unmerge-cells.md): Unmerge a previously merged table cell.
+- [toc.configure](https://docs.superdoc.dev/document-api/reference/toc/configure.md): Update the configuration switches of a table of contents.
+- [toc.editEntry](https://docs.superdoc.dev/document-api/reference/toc/edit-entry.md): Update the properties of a TC (table of contents entry) field.
+- [toc.get](https://docs.superdoc.dev/document-api/reference/toc/get.md): Retrieve details of a specific table of contents.
+- [toc.getEntry](https://docs.superdoc.dev/document-api/reference/toc/get-entry.md): Retrieve details of a specific TC (table of contents entry) field.
+- [Table of Contents operations](https://docs.superdoc.dev/document-api/reference/toc/index.md): Table of Contents operation reference from the canonical Document API contract.
+- [toc.list](https://docs.superdoc.dev/document-api/reference/toc/list.md): List all tables of contents in the document.
+- [toc.listEntries](https://docs.superdoc.dev/document-api/reference/toc/list-entries.md): List all TC (table of contents entry) fields in the document body.
+- [toc.markEntry](https://docs.superdoc.dev/document-api/reference/toc/mark-entry.md): Insert a TC (table of contents entry) field at the target paragraph.
+- [toc.remove](https://docs.superdoc.dev/document-api/reference/toc/remove.md): Remove a table of contents from the document.
+- [toc.unmarkEntry](https://docs.superdoc.dev/document-api/reference/toc/unmark-entry.md): Remove a TC (table of contents entry) field from the document.
+- [toc.update](https://docs.superdoc.dev/document-api/reference/toc/update.md): Rebuild or refresh the materialized content of a table of contents.
+- [trackChanges.decide](https://docs.superdoc.dev/document-api/reference/track-changes/decide.md): Accept or reject a tracked change (by ID or scope: all).
+- [trackChanges.get](https://docs.superdoc.dev/document-api/reference/track-changes/get.md): Retrieve a single tracked change by ID.
+- [Track Changes operations](https://docs.superdoc.dev/document-api/reference/track-changes/index.md): Track Changes operation reference from the canonical Document API contract.
+- [trackChanges.list](https://docs.superdoc.dev/document-api/reference/track-changes/list.md): List all tracked changes in the document.
+- [Best practices](https://docs.superdoc.dev/document-engine/ai-agents/best-practices.md): Get better results from LLM document editing — prompting, tool call patterns, and workflow tips
+- [Debugging](https://docs.superdoc.dev/document-engine/ai-agents/debugging.md): Troubleshoot LLM tool calls — logging, error shapes, and common failure modes
+- [LLM eval results](https://docs.superdoc.dev/document-engine/ai-agents/eval-results.md): Which LLMs work best with SuperDoc's Document API — tested with Promptfoo across 7 models and 360+ tools
+- [How to use](https://docs.superdoc.dev/document-engine/ai-agents/integrations.md): Build an AI agent that edits documents using SuperDoc LLM tools — complete, copy-pasteable examples
+- [AI Agents](https://docs.superdoc.dev/document-engine/ai-agents/llm-tools.md): Document tools that plug into any LLM provider — what they do and how they work
+- [MCP Server](https://docs.superdoc.dev/document-engine/ai-agents/mcp-server.md): Give AI agents direct access to .docx files through the Model Context Protocol
+- [Skills](https://docs.superdoc.dev/document-engine/ai-agents/skills.md): Reusable prompt templates that teach LLMs how to edit documents with SuperDoc tools
+- [CLI](https://docs.superdoc.dev/document-engine/cli.md): Edit documents from the terminal with the SuperDoc CLI
+- [Document Engine](https://docs.superdoc.dev/document-engine/overview.md): Programmatic document editing — in the browser, from the terminal, or through SDKs
+- [SDK Diffing](https://docs.superdoc.dev/document-engine/sdk-diffing.md): Generate tracked-change redlines from two documents with the Node.js and Python SDKs
+- [SDKs](https://docs.superdoc.dev/document-engine/sdks.md): Node.js and Python SDKs for programmatic document editing
+- [BlockNode extension](https://docs.superdoc.dev/extensions/block-node.md)
+- [Bold extension](https://docs.superdoc.dev/extensions/bold.md)
+- [Bookmarks extension](https://docs.superdoc.dev/extensions/bookmarks.md)
+- [Bullet list](https://docs.superdoc.dev/extensions/bullet-list.md)
+- [Color extension](https://docs.superdoc.dev/extensions/color.md)
+- [Comments extension](https://docs.superdoc.dev/extensions/comments.md)
+- [ContentBlock extension](https://docs.superdoc.dev/extensions/content-block.md)
+- [ContextMenu extension](https://docs.superdoc.dev/extensions/context-menu.md)
+- [Creating Extensions](https://docs.superdoc.dev/extensions/creating-extensions.md)
+- [CustomSelection extension](https://docs.superdoc.dev/extensions/custom-selection.md)
+- [Document extension](https://docs.superdoc.dev/extensions/document.md)
+- [Document Index extension](https://docs.superdoc.dev/extensions/document-index.md)
+- [Document Section extension](https://docs.superdoc.dev/extensions/document-section.md)
+- [DropCursor extension](https://docs.superdoc.dev/extensions/dropcursor.md)
+- [Field Annotation](https://docs.superdoc.dev/extensions/field-annotation.md): Interactive form fields for documents. It can be used when variable content is needed inside the document. Supports text, signature, image, checkbox, link, and HTML field types.
+- [FontFamily extension](https://docs.superdoc.dev/extensions/font-family.md)
+- [FontSize extension](https://docs.superdoc.dev/extensions/font-size.md)
+- [Footnote extension](https://docs.superdoc.dev/extensions/footnote.md)
+- [FormatCommands extension](https://docs.superdoc.dev/extensions/format-commands.md)
+- [Gapcursor extension](https://docs.superdoc.dev/extensions/gapcursor.md)
+- [Heading extension](https://docs.superdoc.dev/extensions/heading.md)
+- [Highlight extension](https://docs.superdoc.dev/extensions/highlight.md)
+- [History extension](https://docs.superdoc.dev/extensions/history.md)
+- [Image extension](https://docs.superdoc.dev/extensions/image.md)
+- [Italic extension](https://docs.superdoc.dev/extensions/italic.md)
+- [LineBreak extension](https://docs.superdoc.dev/extensions/line-break.md)
+- [Line Height](https://docs.superdoc.dev/extensions/line-height.md)
+- [Link extension](https://docs.superdoc.dev/extensions/link.md)
+- [Linked Styles extension](https://docs.superdoc.dev/extensions/linked-styles.md)
+- [List item](https://docs.superdoc.dev/extensions/list-item.md)
+- [Mention extension](https://docs.superdoc.dev/extensions/mention.md)
+- [NodeResizer extension](https://docs.superdoc.dev/extensions/noderesizer.md)
+- [Ordered list](https://docs.superdoc.dev/extensions/ordered-list.md)
+- [Extensions API](https://docs.superdoc.dev/extensions/overview.md)
+- [PageNumber extension](https://docs.superdoc.dev/extensions/page-number.md)
+- [Paragraph extension](https://docs.superdoc.dev/extensions/paragraph.md)
+- [Permission Ranges extension](https://docs.superdoc.dev/extensions/permission-ranges.md)
+- [Placeholder extension](https://docs.superdoc.dev/extensions/placeholder.md)
+- [PopoverPlugin extension](https://docs.superdoc.dev/extensions/popover-plugin.md)
+- [RunItem extension](https://docs.superdoc.dev/extensions/run-item.md)
+- [Search extension](https://docs.superdoc.dev/extensions/search.md)
+- [ShapeContainer extension](https://docs.superdoc.dev/extensions/shape-container.md)
+- [ShapeTextbox extension](https://docs.superdoc.dev/extensions/shape-textbox.md)
+- [Strike extension](https://docs.superdoc.dev/extensions/strike.md)
+- [StructuredContent extension](https://docs.superdoc.dev/extensions/structured-content.md)
+- [TabNode extension](https://docs.superdoc.dev/extensions/tab.md)
+- [Table extension](https://docs.superdoc.dev/extensions/table.md)
+- [TableCell extension](https://docs.superdoc.dev/extensions/table-cell.md)
+- [TableHeader extension](https://docs.superdoc.dev/extensions/table-header.md)
+- [Table of Contents extension](https://docs.superdoc.dev/extensions/table-of-contents.md)
+- [TableRow extension](https://docs.superdoc.dev/extensions/table-row.md)
+- [TextAlign extension](https://docs.superdoc.dev/extensions/text-align.md)
+- [Text Indent](https://docs.superdoc.dev/extensions/text-indent.md)
+- [TextStyle extension](https://docs.superdoc.dev/extensions/text-style.md)
+- [TextTransform extension](https://docs.superdoc.dev/extensions/text-transform.md)
+- [Track Changes extension](https://docs.superdoc.dev/extensions/track-changes.md)
+- [Underline extension](https://docs.superdoc.dev/extensions/underline.md)
+- [AI Agents & LLMs](https://docs.superdoc.dev/getting-started/ai-agents.md)
+- [Font Support](https://docs.superdoc.dev/getting-started/fonts.md)
+- [Angular Integration](https://docs.superdoc.dev/getting-started/frameworks/angular.md)
+- [Laravel Integration](https://docs.superdoc.dev/getting-started/frameworks/laravel.md)
+- [Next.js](https://docs.superdoc.dev/getting-started/frameworks/nextjs.md)
+- [Nuxt Integration](https://docs.superdoc.dev/getting-started/frameworks/nuxt.md)
+- [React Integration](https://docs.superdoc.dev/getting-started/frameworks/react.md)
+- [Vanilla JavaScript](https://docs.superdoc.dev/getting-started/frameworks/vanilla-js.md)
+- [Vue Integration](https://docs.superdoc.dev/getting-started/frameworks/vue.md)
+- [Import/Export](https://docs.superdoc.dev/getting-started/import-export.md)
+- [Installation](https://docs.superdoc.dev/getting-started/installation.md)
+- [Meet SuperDoc](https://docs.superdoc.dev/getting-started/introduction.md)
+- [Quick start](https://docs.superdoc.dev/getting-started/quickstart.md)
+- [Theming](https://docs.superdoc.dev/getting-started/theming.md)
+- [Hocuspocus](https://docs.superdoc.dev/guides/collaboration/hocuspocus.md)
+- [Liveblocks](https://docs.superdoc.dev/guides/collaboration/liveblocks.md)
+- [Self-Hosted Collaboration](https://docs.superdoc.dev/guides/collaboration/self-hosted-overview.md)
+- [SuperDoc Yjs Collaboration](https://docs.superdoc.dev/guides/collaboration/superdoc-yjs.md)
+- [Accessibility](https://docs.superdoc.dev/guides/general/accessibility.md)
+- [Custom proofing provider](https://docs.superdoc.dev/guides/general/custom-proofing-provider.md)
+- [Custom themes](https://docs.superdoc.dev/guides/general/custom-themes.md)
+- [Spell Check & Proofing](https://docs.superdoc.dev/guides/general/proofing.md)
+- [Trust & Security](https://docs.superdoc.dev/guides/general/security.md)
+- [Stable navigation after edits](https://docs.superdoc.dev/guides/general/stable-navigation.md): Find nodes once and navigate to them reliably after document edits.
+- [Storage](https://docs.superdoc.dev/guides/general/storage.md)
+- [Breaking Changes v1.0.0](https://docs.superdoc.dev/guides/migration/breaking-changes-v1.md)
+- [CSS variable migration](https://docs.superdoc.dev/guides/migration/css-variables.md)
+- [Migrate to the Document API](https://docs.superdoc.dev/guides/migration/document-api.md)
+- [Migrate from ProseMirror to SuperDoc](https://docs.superdoc.dev/guides/migration/prosemirror.md)
+- [TypeScript Migration Guide](https://docs.superdoc.dev/guides/migration/typescript-migration.md)
+- [Configuration](https://docs.superdoc.dev/modules/collaboration/configuration.md)
+- [Collaboration](https://docs.superdoc.dev/modules/collaboration/overview.md)
+- [Quickstart](https://docs.superdoc.dev/modules/collaboration/quickstart.md)
+- [Upgrade to Collaboration](https://docs.superdoc.dev/modules/collaboration/upgrade-to-collaboration.md)
+- [Comments](https://docs.superdoc.dev/modules/comments.md)
+- [Context Menu](https://docs.superdoc.dev/modules/context-menu.md)
+- [Links](https://docs.superdoc.dev/modules/links.md)
+- [Modules](https://docs.superdoc.dev/modules/overview.md)
+- [PDF](https://docs.superdoc.dev/modules/pdf.md)
+- [Built-in Toolbar](https://docs.superdoc.dev/modules/toolbar/built-in.md)
+- [Headless Toolbar Examples](https://docs.superdoc.dev/modules/toolbar/examples.md)
+- [Headless Toolbar](https://docs.superdoc.dev/modules/toolbar/headless.md)
+- [Toolbar](https://docs.superdoc.dev/modules/toolbar/overview.md)
+- [Whiteboard](https://docs.superdoc.dev/modules/whiteboard.md)
+- [License](https://docs.superdoc.dev/resources/license.md)
+- [Telemetry](https://docs.superdoc.dev/resources/telemetry.md)
+- [API Reference](https://docs.superdoc.dev/solutions/esign/api-reference.md)
+- [Backend Implementation](https://docs.superdoc.dev/solutions/esign/backend.md)
+- [Configuration](https://docs.superdoc.dev/solutions/esign/configuration.md)
+- [eSign](https://docs.superdoc.dev/solutions/esign/introduction.md)
+- [Quick Start](https://docs.superdoc.dev/solutions/esign/quickstart.md)
+- [Solutions](https://docs.superdoc.dev/solutions/overview.md)
+- [API Reference](https://docs.superdoc.dev/solutions/template-builder/api-reference.md)
+- [Configuration Options](https://docs.superdoc.dev/solutions/template-builder/configuration.md)
+- [Template Builder](https://docs.superdoc.dev/solutions/template-builder/introduction.md)
+- [Quick Start Guide](https://docs.superdoc.dev/solutions/template-builder/quickstart.md)
+
+## OpenAPI Specs
+
+- [openapi](https://docs.superdoc.dev/openapi.json)
+
+
+Built with [Mintlify](https://mintlify.com).

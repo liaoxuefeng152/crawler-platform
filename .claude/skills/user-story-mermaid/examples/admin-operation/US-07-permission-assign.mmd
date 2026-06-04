@@ -1,0 +1,64 @@
+%% ============================================================================
+%% # 用户故事时序图 Example: US-07 分配资产包权限
+%% ============================================================================
+%%
+%% 【类型】: 管理员操作（权限分配）
+%% 【适用场景】:
+%%   - 资源权限分配给用户
+%%   - 多对多关系管理（资产包-用户）
+%%   - 权限勾选交互设计
+%%   - 权限验证闭环（被分配用户能否看到资源）
+%%
+%% 【关键特征】:
+%%   - Step数量: 4（适中）
+%%   - 参与者数量: 3（Admin, Platform, DB）- 最小化
+%%   - 特殊结构: 无loop，但有多API并行调用（获取权限列表+获取用户列表）
+%%
+%% 【学习要点】:
+%%   1. 权限分配的多对多关系设计（AssetPackage.permissions: String[]）
+%%   2. 多API并行调用的表达方式（同一Step内多个Platform->>DB调用）
+%%   3. 权限验证的闭环设计（Step 4: 被分配用户查看资产包）
+%%   4. PUT请求用于权限更新（PUT /api/asset-packages/{id}/permissions）
+%%   5. 完整闭环：被分配用户登录后能看到新分配的资产包
+%%
+%% 【约束验证】:
+%%   ✅ Step ≤ 7  ✅ Participant ≤ 5  ✅ API格式规范  ✅ 响应精简
+%%
+%% ============================================================================
+
+sequenceDiagram
+    autonumber
+    participant Admin as 管理员
+    participant Platform as 个贷处置平台
+    participant DB as MongoDB
+
+    Note over Admin,DB: Step 1: 查看资产包列表
+
+    Admin->>Platform: 打开资产包管理页面
+    Platform->>DB: GET /api/asset-packages
+    DB-->>Platform: 返回资产包列表
+    Platform-->>Admin: 展示资产包列表（含操作列）
+
+    Note over Admin,DB: Step 2: 点击"权限分配"
+
+    Admin->>Platform: 点击资产包操作列的"权限分配"按钮
+    Platform->>DB: GET /api/asset-packages/{id}/permissions
+    DB-->>Platform: 返回当前权限分配列表
+    Platform->>DB: GET /api/users
+    DB-->>Platform: 返回可选用户列表
+    Platform-->>Admin: 弹出人员列表弹框，已分配用户显示勾选状态
+
+    Note over Admin,DB: Step 3: 选择用户分配权限
+
+    Admin->>Platform: 勾选/取消勾选用户
+    Admin->>Platform: 点击确认保存
+    Platform->>DB: PUT /api/asset-packages/{id}/permissions
+    DB-->>Platform: 权限更新成功
+    Platform-->>Admin: 提示分配成功，关闭弹框
+
+    Note over Admin,DB: Step 4: 被分配用户查看资产包
+
+    Note right of Admin: 被分配用户登录后
+    Platform->>DB: GET /api/asset-packages?userId=xxx
+    DB-->>Platform: 返回该用户有权限的资产包列表
+    Platform-->>Admin: 资产包列表包含新分配的资产包

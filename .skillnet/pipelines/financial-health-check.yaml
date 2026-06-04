@@ -1,0 +1,52 @@
+name: financial-health-check-pipeline
+description: 企业财务健康检查完整流程
+
+inputs:
+  company_data:
+    type: object
+    required: true
+    description: 企业财务数据（资产负债表、利润表数据）
+
+stages:
+  # 第一阶段：基础报表分析
+  report-analysis:
+    skill: financial-report-analyzer
+    inputs:
+      report_type: balance_sheet
+      data: ${{ inputs.company_data }}
+      period: current
+    outputs: [analysis, ratios]
+
+  # 第二阶段：深度比率分析（依赖第一阶段）
+  ratio-analysis:
+    skill: financial-ratio-analyzer
+    depends_on: [report-analysis]
+    inputs:
+      company_data: ${{ inputs.company_data }}
+      industry_benchmarks:
+        current_ratio: 1.5
+        debt_to_equity: 2.0
+        roe: 0.15
+    outputs: [dupont_analysis, benchmark_comparison, alerts]
+
+  # 第三阶段：贷款能力评估（依赖第二阶段）
+  loan-capability:
+    skill: loan-calculator
+    depends_on: [ratio-analysis]
+    inputs:
+      loan_type: equal_installment
+      principal: ${{ inputs.company_data.total_assets * 0.3 }}
+      annual_rate: 0.049
+      term_months: 360
+    outputs: [monthly_payment, total_interest]
+
+output:
+  health_report:
+    basic_analysis: ${{ stages.report-analysis.outputs.analysis }}
+    ratios: ${{ stages.report-analysis.outputs.ratios }}
+    dupont: ${{ stages.ratio-analysis.outputs.dupont_analysis }}
+    benchmark: ${{ stages.ratio-analysis.outputs.benchmark_comparison }}
+    alerts: ${{ stages.ratio-analysis.outputs.alerts }}
+    loan_capability:
+      payment: ${{ stages.loan-capability.outputs.monthly_payment }}
+      interest: ${{ stages.loan-capability.outputs.total_interest }}

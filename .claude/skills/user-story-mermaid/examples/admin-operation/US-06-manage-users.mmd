@@ -1,0 +1,78 @@
+%% ============================================================================
+%% # 用户故事时序图 Example: US-06 管理用户
+%% ============================================================================
+%%
+%% 【类型】: 管理员操作（完整生命周期管理）
+%% 【适用场景】:
+%%   - 用户账号的完整生命周期管理
+%%   - 新增 + 编辑 + 状态切换 + 删除
+%%   - 多步骤管理流程
+%%   - 状态变更的交互设计
+%%
+%% 【关键特征】:
+%%   - Step数量: 5（完整生命周期）
+%%   - 参与者数量: 3（Admin, Platform, DB）- 最小化
+%%   - 特殊结构: 无loop，但有多步骤管理流程
+%%
+%% 【学习要点】:
+%%   1. 用户状态说明的表格标注方式（状态值、中文名称、说明）
+%%   2. 状态切换的交互设计（点击开关→弹出确认→确认切换→显示新状态）
+%%   3. DELETE请求用于删除操作
+%%   4. PATCH请求用于部分更新（如状态切换）
+%%   5. 完整闭环：管理员看到删除成功，用户列表刷新
+%%
+%% 【约束验证】:
+%%   ✅ Step ≤ 7  ✅ Participant ≤ 5  ✅ API格式规范  ✅ 响应精简
+%%
+%% ============================================================================
+
+sequenceDiagram
+    autonumber
+    participant Admin as 管理员
+    participant Platform as 个贷处置平台
+    participant DB as MongoDB
+
+    Note over Admin,DB: Step 1: 查看用户列表
+
+    Admin->>Platform: 打开用户管理页面
+    Platform->>DB: GET /api/users
+    DB-->>Platform: 返回用户列表
+    Platform-->>Admin: 展示用户列表（用户名、邮箱、角色、状态等）
+
+    Note over Admin,DB: Step 2: 新增用户
+
+    Admin->>Platform: 点击"新增用户"按钮
+    Platform-->>Admin: 打开新增用户对话框
+    Admin->>Platform: 填写用户信息（用户名、密码、邮箱、角色等）
+    Platform->>DB: POST /api/users
+    DB-->>Platform: 创建成功
+    Platform-->>Admin: 提示创建成功，刷新用户列表
+
+    Note over Admin,DB: Step 3: 编辑用户
+
+    Admin->>Platform: 选择用户点击"编辑"
+    Platform->>DB: GET /api/users/{id}
+    DB-->>Platform: 返回用户详情
+    Platform-->>Admin: 打开编辑对话框，展示当前信息
+    Admin->>Platform: 修改用户信息
+    Platform->>DB: PUT /api/users/{id}
+    DB-->>Platform: 更新成功
+    Platform-->>Admin: 提示更新成功
+
+    Note over Admin,DB: Step 4: 账号状态开关
+
+    Admin->>Platform: 点击账号状态开关
+    Platform-->>Admin: 弹出确认对话框
+    Admin->>Platform: 确认切换状态
+    Platform->>DB: PATCH /api/users/{id}/status
+    DB-->>Platform: 状态更新成功
+    Platform-->>Admin: 显示新状态（启用/停用）
+
+    Note over Admin,DB: Step 5: 删除用户
+
+    Admin->>Platform: 选择用户点击"删除"
+    Platform-->>Admin: 弹出删除确认对话框
+    Admin->>Platform: 确认删除
+    Platform->>DB: DELETE /api/users/{id}
+    DB-->>Platform: 删除成功
+    Platform-->>Admin: 提示删除成功，刷新用户列表

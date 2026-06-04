@@ -1,0 +1,109 @@
+// Prisma Schema Template for MongoDB
+// 智能爬虫与数据提取平台 数据库模型模板
+//
+// 使用说明：
+// 1. 此文件是模板文件，请勿直接修改 prisma/schema.prisma
+// 2. 添加新表时，只需在此文件中定义模型
+// 3. 运行 `npm run generate:schema` 自动生成带前缀的 schema
+// 4. 运行 `npm run db:migrate:prefix` 自动迁移数据库表名
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================
+// 登录用户模型
+// ============================================
+model LoginUser {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  username    String   @unique
+  password    String
+  displayName String
+  email       String   @unique
+  avatar      String   @default("")
+  status      String   @default("active")
+  department  String?
+  phone       String?
+  role        String   @default("user")
+
+  larkAccessToken    String?
+  larkRefreshToken   String?
+  larkTokenExpiresAt DateTime?
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("login_users")
+}
+
+model User {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  phone     String   @unique
+  nickname  String
+  avatar    String   @default("")
+  status    String   @default("active")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}
+
+// ============================================
+// 爬虫基础任务表
+// ============================================
+model CrawlTask {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  taskId        String   @unique
+  urls          String
+  status        String   @default("pending")
+  mdFilePath    String   @default("")
+  mdFileName    String   @default("")
+  domain        String   @default("")
+  crawlTime     DateTime @default(now())
+  mdContent     String   @default("")
+  logs          String   @default("")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@map("crawl_tasks")
+}
+
+// ============================================
+// 主字段表
+// ============================================
+model MainField {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  fieldId       String   @unique
+  fieldName     String
+  fieldDesc     String
+  taskId        String
+  sourceMdPos   String   @default("")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@map("main_fields")
+}
+
+// ============================================
+// 子字段表
+// ============================================
+model SubField {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  fieldId       String   @unique
+  fieldName     String
+  fieldDesc     String
+  extractValue  String   @default("")
+  mainFieldId   String
+  taskId        String
+  sourceMdPos   String   @default("")
+  valueType     String   @default("text")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@map("sub_fields")
+}

@@ -1,0 +1,468 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+
+  /* Light mode keeps the original blue-white brand scale. */
+  --color-brand-50: oklch(0.97 0.01 238.66);
+  --color-brand-100: oklch(0.94 0.02 238.66);
+  --color-brand-200: oklch(0.89 0.04 238.66);
+  --color-brand-300: oklch(0.83 0.07 238.66);
+  --color-brand-400: oklch(0.73 0.12 238.66);
+  --color-brand-500: oklch(0.61 0.18 238.66);
+  --color-brand-600: #1890ff;
+  --color-brand-700: oklch(0.47 0.18 238.66);
+  --color-brand-800: oklch(0.38 0.16 238.66);
+  --color-brand-900: oklch(0.31 0.14 238.66);
+  --color-brand-950: oklch(0.24 0.12 238.66);
+
+  --font-headline: 'Space Grotesk', 'Inter', var(--font-geist-sans), sans-serif;
+}
+
+:root {
+  --radius: 0.625rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+
+  --primary: var(--color-brand-600);
+  --primary-surface: var(--color-brand-600);
+  --primary-foreground: oklch(1 0 0);
+  --brand-accent: var(--color-brand-600);
+  --surface-lowest: #070d1f;
+  --surface-page: #0c1324;
+  --surface-low: #151b2d;
+  --surface-container: #191f31;
+  --surface-high: #23293c;
+  --surface-highest: #2e3447;
+  --text-secondary: #bec8d2;
+  --text-muted-deep: #88929b;
+  --outline-deep: #3e4850;
+
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: var(--color-brand-600);
+
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: var(--color-brand-600);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: var(--color-brand-600);
+}
+
+.dark {
+  --background: #0c1324;
+  --foreground: #dce1fb;
+  --card: #191f31;
+  --card-foreground: #dce1fb;
+  --popover: #23293c;
+  --popover-foreground: #dce1fb;
+
+  --primary: #89ceff;
+  --primary-surface: #0c1324;
+  --primary-foreground: #ffffff;
+  --brand-accent: #89ceff;
+
+  --secondary: #191f31;
+  --secondary-foreground: #dce1fb;
+  --muted: #151b2d;
+  --muted-foreground: #88929b;
+  --accent: #23293c;
+  --accent-foreground: #dce1fb;
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: rgba(62, 72, 80, 0.45);
+  --input: #151b2d;
+  --ring: rgba(137, 206, 255, 0.35);
+  --chart-1: #89ceff;
+  --chart-2: #ffb95f;
+  --chart-3: #4ade80;
+  --chart-4: #f472b6;
+  --chart-5: #a78bfa;
+  --sidebar: #070d1f;
+  --sidebar-foreground: #bec8d2;
+  --sidebar-primary: #89ceff;
+  --sidebar-primary-foreground: #00344d;
+  --sidebar-accent: rgba(137, 206, 255, 0.1);
+  --sidebar-accent-foreground: #89ceff;
+  --sidebar-border: rgba(62, 72, 80, 0.35);
+  --sidebar-ring: rgba(137, 206, 255, 0.35);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family:
+      var(--font-geist-sans),
+      'Inter',
+      -apple-system,
+      BlinkMacSystemFont,
+      'Noto Sans SC',
+      sans-serif;
+  }
+}
+
+@layer utilities {
+  .bg-primary,
+  .data-\[state\=active\]\:bg-primary[data-state='active'],
+  .data-\[state\=checked\]\:bg-primary[data-state='checked'],
+  .dark .bg-primary,
+  .dark .data-\[state\=active\]\:bg-primary[data-state='active'],
+  .dark .data-\[state\=checked\]\:bg-primary[data-state='checked'],
+  .dark .dark\:data-\[state\=checked\]\:bg-primary[data-state='checked'] {
+    background-color: var(--primary-surface);
+  }
+
+  .hover\:bg-primary\/90:hover,
+  .dark .hover\:bg-primary\/90:hover {
+    background-color: color-mix(in oklch, var(--primary-surface) 88%, white);
+  }
+
+  .font-headline {
+    font-family: var(--font-headline);
+  }
+
+  .deep-matrix-panel {
+    background: color-mix(in srgb, var(--surface-container) 82%, transparent);
+    border: 1px solid rgba(62, 72, 80, 0.45);
+    backdrop-filter: blur(20px);
+  }
+}
+
+/* Full-width layout fixes for MainLayout */
+@layer utilities {
+  /* Line clamp utilities for text truncation */
+  .line-clamp-1 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+  }
+
+  .line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .line-clamp-3 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+
+  /* Force Sidebar components to use full viewport width */
+  .sidebar-container-full {
+    width: 100vw !important;
+    max-width: 100vw !important;
+  }
+
+  /* Override SidebarInset default margin that prevents full width */
+  [data-slot='sidebar-inset'] {
+    margin: 0 !important;
+  }
+
+  /* More specific override for md:peer-data-[variant=inset]:m-2 */
+  @media (min-width: 768px) {
+    [data-sidebar][data-variant='inset'] {
+      margin: 0 !important;
+    }
+    .peer[data-variant='inset'] ~ [data-slot='sidebar-inset'] {
+      margin: 0 !important;
+    }
+  }
+
+  /* Even more specific override using peer selector */
+  .group[data-variant='inset']
+    .peer[data-variant='inset']
+    ~ [data-slot='sidebar-inset'] {
+    margin: 0 !important;
+  }
+
+  /* Ensure main content area uses full available width */
+  .sidebar-content-full {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Force MainLayout to use full screen width */
+  .main-layout-full {
+    width: 100vw !important;
+    max-width: 100vw !important;
+  }
+
+  /* Remove any unwanted margins or padding that prevent full width */
+  .main-layout-content {
+    margin: 0 !important;
+    padding-left: env(safe-area-inset-left) !important;
+    padding-right: env(safe-area-inset-right) !important;
+  }
+
+  /* Force sidebar wrapper to use full width */
+  [data-slot='sidebar-wrapper'] {
+    width: 100vw !important;
+    max-width: 100vw !important;
+  }
+
+  /* Ensure cursor pointer is applied to avatar button and dropdown */
+  .avatar-cursor-pointer {
+    cursor: pointer !important;
+  }
+
+  .avatar-cursor-pointer * {
+    cursor: pointer !important;
+  }
+
+  /* Ensure dropdown menu content maintains pointer cursor */
+  .dropdown-content-pointer {
+    cursor: pointer !important;
+  }
+
+  .dropdown-content-pointer * {
+    cursor: pointer !important;
+  }
+
+  /* Gradient animation for hero section */
+  @keyframes gradient-x {
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  .animate-gradient-x {
+    background-size: 200% 200%;
+    animation: gradient-x 15s ease infinite;
+  }
+
+  /* ========================================
+     Dashboard Tech Effects - Neural Interface
+     ======================================== */
+
+  /* Animated gradient border flow */
+  @keyframes border-flow {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .animate-border-flow {
+    background-size: 200% 200%;
+    animation: border-flow 8s ease infinite;
+  }
+
+  /* Gradient text shift animation */
+  @keyframes gradient-shift {
+    0% {
+      background-position: 0% center;
+    }
+    50% {
+      background-position: 100% center;
+    }
+    100% {
+      background-position: 0% center;
+    }
+  }
+
+  .animate-gradient-shift {
+    animation: gradient-shift 6s ease infinite;
+  }
+
+  /* Slow pulse for separator */
+  @keyframes pulse-slow {
+    0%,
+    100% {
+      opacity: 0.6;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+  .animate-pulse-slow {
+    animation: pulse-slow 3s ease-in-out infinite;
+  }
+
+  /* Tech grid background pattern */
+  .tech-grid-bg {
+    background-image:
+      linear-gradient(rgba(24, 144, 255, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(24, 144, 255, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .dark .tech-grid-bg {
+    background-image:
+      linear-gradient(rgba(137, 206, 255, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(137, 206, 255, 0.06) 1px, transparent 1px);
+  }
+
+  /* Scan line effect - retro tech feel */
+  @keyframes scan-line {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(100%);
+    }
+  }
+
+  .scan-line-effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(24, 144, 255, 0.035) 50%,
+      transparent 100%
+    );
+    animation: scan-line 8s linear infinite;
+    pointer-events: none;
+  }
+
+  .dark .scan-line-effect {
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(137, 206, 255, 0.035) 50%,
+      transparent 100%
+    );
+  }
+
+  /* Floating particles */
+  @keyframes float-particle {
+    0%,
+    100% {
+      transform: translateY(0) translateX(0);
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.3;
+    }
+    50% {
+      transform: translateY(-100px) translateX(20px);
+      opacity: 0.5;
+    }
+    90% {
+      opacity: 0.3;
+    }
+  }
+
+  .tech-particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--brand-accent);
+    border-radius: 50%;
+    opacity: 0;
+    filter: blur(1px);
+  }
+
+  .particle-1 {
+    top: 20%;
+    left: 15%;
+    animation: float-particle 12s ease-in-out infinite;
+  }
+
+  .particle-2 {
+    top: 40%;
+    left: 80%;
+    animation: float-particle 15s ease-in-out infinite 2s;
+  }
+
+  .particle-3 {
+    top: 60%;
+    left: 25%;
+    animation: float-particle 18s ease-in-out infinite 4s;
+  }
+
+  .particle-4 {
+    top: 80%;
+    left: 70%;
+    animation: float-particle 20s ease-in-out infinite 6s;
+  }
+
+  /* Tech badge hover glow */
+  .tech-badge:hover {
+    box-shadow: 0 0 20px rgba(24, 144, 255, 0.15);
+  }
+
+  .dark .tech-badge:hover {
+    box-shadow: 0 0 20px rgba(137, 206, 255, 0.18);
+  }
+}

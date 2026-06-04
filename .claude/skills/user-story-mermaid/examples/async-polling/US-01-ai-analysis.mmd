@@ -1,0 +1,96 @@
+%% ============================================================================
+%% # 用户故事时序图 Example: US-01 AI分析资产包
+%% ============================================================================
+%%
+%% 【类型】: 异步流程 + 轮询（复杂）
+%% 【适用场景】:
+%%   - 需要长时间异步处理的任务（如AI分析、数据处理、文件解析）
+%%   - 用户需要实时查看进度状态
+%%   - 跨系统协作（前端 + AI服务 + 消息队列）
+%%   - 大文件分片上传场景
+%%
+%% 【关键特征】:
+%%   - Step数量: 6（接近上限，复杂流程合理划分）
+%%   - 参与者数量: 5（User, Platform, DB, MinIO, AI）- 达到上限
+%%   - 特殊结构: loop轮询、Kafka消息、分片上传
+%%
+%% 【学习要点】:
+%%   1. 如何用Kafka标注异步消息交互（Platform->>AI: Kafka: topic-name）
+%%   2. loop结构展示轮询机制的标准化写法
+%%   3. 多Step复杂流程的阶段划分策略（创建→上传→通知→轮询→消费→查看）
+%%   4. 分片上传的精简表达方式（初始化→直传→合并）
+%%   5. 完整闭环验证：用户最终看到"已完成"状态和借款人列表
+%%
+%% 【约束验证】:
+%%   ✅ Step ≤ 7  ✅ Participant ≤ 5  ✅ API格式规范  ✅ 响应精简
+%%
+%% ============================================================================
+
+sequenceDiagram
+    autonumber
+    participant User as 用户
+    participant Platform as 个贷处置平台
+    participant DB as MongoDB
+    participant MinIO as MinIO存储
+    participant AI as 个贷字段提取系统(侯鑫)
+
+    Note over User,AI: Step 1: 创建资产包基本信息
+
+    User->>Platform: 填写基本信息（资产包名称、涉及金额）
+    Platform->>DB: POST /api/asset-packages<br/>创建资产包记录
+    DB-->>Platform: 返回 packageId
+    Platform-->>User: 创建成功，返回 packageId
+
+    Note over User,AI: Step 2: 上传借款人列表
+
+    User->>Platform: 下载 Excel 模板
+    Platform->>MinIO: GET /templates/debtor-template.xlsx
+    MinIO-->>Platform: 返回模板文件
+    Platform-->>User: 下载 Excel 模板
+
+    User->>Platform: 上传填写好的 Excel 文件
+    Platform->>Platform: 解析 Excel 内容
+    Platform->>DB: POST /api/asset-packages/{id}/debtors<br/>保存借款人列表
+    DB-->>Platform: 保存成功
+    Platform-->>User: 返回借款人列表预览
+
+    Note over User,AI: Step 3: 上传资产包压缩包
+
+    User->>Platform: 选择压缩包并确认上传
+    Platform->>Platform: POST /api/asset-packages/multipart/init<br/>初始化分片上传
+    Platform->>MinIO: 调用 MinIO 创建 multipart upload<br/>Bucket: user-npl-liquo<br/>路径: asset-packages/{packageNo}/origin/
+    MinIO-->>Platform: 返回 uploadId + 预签名URL列表
+    Platform-->>User: 返回预签名URL列表
+    User->>MinIO: 分片直传到 MinIO（使用预签名URL）<br/>Bucket: user-npl-liquo
+    MinIO-->>User: 返回各分片 ETag
+    User->>Platform: POST /api/asset-packages/multipart/complete<br/>通知合并分片
+    Platform->>MinIO: 调用 MinIO completeMultipartUpload<br/>MinIO 执行分片合并
+    MinIO-->>Platform: 合并成功，文件路径确定
+    Platform->>DB: 更新状态为"分析中"
+    Platform-->>User: 上传成功，状态变更为"分析中"
+
+    Note over User,AI: Step 4: 异步通知个贷字段提取系统
+
+    Platform->>AI: Kafka: dev_khc_loan_task_input（发送任务）
+    AI-->>Platform: Kafka: dev_khc_loan_task_result（解析中）
+
+    Note over User,AI: Step 5: 轮询查询解析结果
+
+    loop 每10秒轮询
+        User->>Platform: 查询解析进度
+        Platform->>AI: GET /api/v1/tasks/{package_no}
+        AI-->>Platform: 返回进度
+        Platform-->>User: 显示进度条
+    end
+
+    Note over User,AI: Step 6: 消费解析结果
+
+    Platform->>Platform: Kafka: dev_khc_loan_task_result（消费结果消息）
+    Platform->>DB: 同步借款人列表和提取字段信息
+    DB-->>Platform: 同步成功
+    Platform->>DB: 更新状态为"已完成"
+    Platform-->>User: 状态变更为"已完成"
+    User->>Platform: 查看资产包详情
+    Platform->>DB: GET /api/asset-packages/{id}
+    DB-->>Platform: 返回资产包详情
+    Platform-->>User: 展示借款人列表和提取字段

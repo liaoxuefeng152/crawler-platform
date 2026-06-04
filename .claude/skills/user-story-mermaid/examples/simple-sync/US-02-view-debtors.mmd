@@ -1,0 +1,54 @@
+%% ============================================================================
+%% # 用户故事时序图 Example: US-02 查看借款人列表
+%% ============================================================================
+%%
+%% 【类型】: 简单同步（简单CRUD）
+%% 【适用场景】:
+%%   - 用户查看列表数据
+%%   - 支持筛选、搜索、分页的列表展示
+%%   - 从列表进入详情页面
+%%   - 纯同步请求响应场景
+%%
+%% 【关键特征】:
+%%   - Step数量: 3（简洁，适合快速理解）
+%%   - 参与者数量: 3（User, Platform, DB）- 最小化配置
+%%   - 特殊结构: 无，纯同步流程
+%%
+%% 【学习要点】:
+%%   1. 简单CRUD流程的标准Step划分（进入→查看→详情）
+%%   2. API路径设计模式：GET /api/resource/{id}/sub-resource
+%%   3. 查询参数的精简表达：?page=1&status=all&keyword=
+%%   4. 响应只返回关键数据，不展开详情
+%%   5. 完整闭环：用户最终看到借款人详情
+%%
+%% 【约束验证】:
+%%   ✅ Step ≤ 7  ✅ Participant ≤ 5  ✅ API格式规范  ✅ 响应精简
+%%
+%% ============================================================================
+
+sequenceDiagram
+    autonumber
+    participant User as 用户
+    participant Platform as 个贷处置平台
+    participant DB as MongoDB
+
+    Note over User,DB: Step 1: 进入资产包详情页
+
+    User->>Platform: 点击资产包查看详情
+    Platform->>DB: GET /api/asset-packages/{id}
+    DB-->>Platform: 返回资产包基本信息
+    Platform-->>User: 显示资产包详情
+
+    Note over User,DB: Step 2: 查看借款人列表
+
+    User->>Platform: 查看借款人列表（支持筛选、搜索）
+    Platform->>DB: GET /api/asset-packages/{id}/debtors?page=1&status=all&keyword=
+    DB-->>Platform: 返回借款人列表
+    Platform-->>User: 展示借款人列表（姓名、身份证、状态等）
+
+    Note over User,DB: Step 3: 查看借款人详情
+
+    User->>Platform: 点击某个借款人查看详情
+    Platform->>DB: GET /api/debtors/{id}
+    DB-->>Platform: 返回借款人详细信息
+    Platform-->>User: 展示借款人详情（基本信息、财务信息、提取字段）

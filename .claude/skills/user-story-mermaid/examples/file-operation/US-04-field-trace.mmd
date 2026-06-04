@@ -1,0 +1,61 @@
+%% ============================================================================
+%% # 用户故事时序图 Example: US-04 字段溯源详情
+%% ============================================================================
+%%
+%% 【类型】: 文件操作（字段→文件反向溯源）
+%% 【适用场景】:
+%%   - 字段溯源查看（重心在左栏字段列表）
+%%   - 字段状态修改（识别正确/识别不正确）
+%%   - 从字段定位到文件的逆向流程
+%%   - 与US-03形成互补（方向相反）
+%%
+%% 【关键特征】:
+%%   - Step数量: 3（简洁）
+%%   - 参与者数量: 4（User, Platform, DB, MinIO）
+%%   - 特殊结构: 无loop，但有状态修改流程
+%%
+%% 【学习要点】:
+%%   1. API复用说明的标注方式（> 💡 **API复用说明**）
+%%   2. 字段溯源的逆向流程（字段→文件，与US-03的文件→字段相反）
+%%   3. 状态修改的用户交互流程（悬停→弹出→选择→编辑→确认）
+%%   4. PUT请求的精简表达（PUT /api/debtors/{id}/fields/{fieldId})
+%%   5. 完整闭环：字段更新完成，用户看到修改结果
+%%
+%% 【约束验证】:
+%%   ✅ Step ≤ 7  ✅ Participant ≤ 5  ✅ API格式规范  ✅ 响应精简
+%%
+%% ============================================================================
+
+sequenceDiagram
+    autonumber
+    participant User as 用户
+    participant Platform as 个贷处置平台
+    participant DB as MongoDB
+    participant MinIO as MinIO存储
+
+    Note over User,MinIO: Step 1: 进入字段溯源页（三栏布局，重心在左栏）
+
+    User->>Platform: 点击借款人详情"字段溯源"
+    Platform->>DB: GET /api/debtors/{id}/fields
+    DB-->>Platform: 返回借款人全量字段列表
+    Platform-->>User: 显示三栏布局，左栏展示全量字段列表（重心）
+
+    Note over User,MinIO: Step 2: 点击字段查看溯源文件
+
+    User->>Platform: 点击左栏某个字段
+    Platform->>DB: GET /api/fields/{fieldId}/source
+    DB-->>Platform: 返回字段溯源文件信息
+    Platform->>MinIO: 获取溯源文件预签名URL
+    MinIO-->>Platform: 返回临时URL
+    Platform-->>User: 中间栏展示对应溯源文件，高亮显示字段位置
+
+    Note over User,MinIO: Step 3: 修改字段状态
+
+    User->>Platform: 悬停字段，点击"修改字段状态"
+    Platform-->>User: 弹出选择框（识别正确/识别不正确）
+    User->>Platform: 选择"识别不正确"
+    Platform-->>User: 字段变为可编辑状态
+    User->>Platform: 修改字段内容，点击确认
+    Platform->>DB: PUT /api/debtors/{id}/fields/{fieldId}
+    DB-->>Platform: 保存成功
+    Platform-->>User: 字段更新完成

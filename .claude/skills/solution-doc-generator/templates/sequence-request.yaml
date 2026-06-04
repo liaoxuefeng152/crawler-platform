@@ -1,0 +1,146 @@
+# 用户故事时序图需求模板
+# 此模板用于收集时序图需求，传递给 user-story-mermaid skill
+
+# === 基本信息 ===
+storyId: 'US-01' # 故事编号（如 US-01, US-02 等）
+storyName: '我要AI分析资产包' # 故事名称（简洁描述用户意图）
+storyDescription: '用户创建资产包、上传借款人列表、上传压缩包，系统异步分析并返回结果' # 功能说明（1-2句话）
+
+# === 参与者定义（最多5个） ===
+participants:
+  # 用户角色
+  - role: 'User' # 固定命名
+    alias: '用户' # 中文别名
+    type: 'user_role' # 类型标记
+
+  # 系统平台（必选）
+  - role: 'Platform' # 固定命名
+    alias: '个贷处置平台' # 系统名称
+    type: 'system_actor' # 类型标记
+
+  # 数据库（按需）
+  - role: 'DB'
+    alias: 'MongoDB'
+    type: 'storage'
+
+  # 文件存储（如涉及文件操作）
+  - role: 'MinIO'
+    alias: 'MinIO存储'
+    type: 'file_storage'
+    required: false # 可选
+
+  # 外部系统（如涉及外部服务协作）
+  - role: 'AI'
+    alias: '个贷字段提取系统(侯鑫)'
+    type: 'external_service'
+    required: false # 可选
+
+  # 消息队列（如涉及异步消息）
+  - role: 'Kafka'
+    alias: 'Kafka消息队列'
+    type: 'message_queue'
+    required: false # 可选
+
+# === 流程类型 ===
+# 可选值:
+#   - sync: 简单同步流程（纯CRUD，请求→响应）
+#   - async_with_polling: 异步+轮询（用户主动查询进度）
+#   - async_with_callback: 异步+回调（系统通知结果）
+flowType: 'async_with_polling'
+
+# === Step 划分（最多7个）===
+steps:
+  - stepNumber: 1
+    title: '创建资产包基本信息'
+    purpose: '用户填写基本信息，系统创建记录'
+    stepType: 'entry' # entry | action | processing | async | display
+
+  - stepNumber: 2
+    title: '上传借款人列表'
+    purpose: '下载模板、填写上传、保存列表'
+    stepType: 'action'
+
+  - stepNumber: 3
+    title: '上传资产包压缩包'
+    purpose: '分片上传文件到存储'
+    stepType: 'action'
+    specialNote: '分片上传：初始化→直传→合并' # 特殊流程说明
+
+  - stepNumber: 4
+    title: '异步通知AI系统'
+    purpose: '发送Kafka消息通知处理'
+    stepType: 'async'
+    kafkaTopics: # Kafka topic 定义（仅异步流程）
+      - topic: 'dev_khc_loan_task_input'
+        direction: 'send' # send | receive
+        producer: 'Platform'
+        consumer: 'AI'
+      - topic: 'dev_khc_loan_task_result'
+        direction: 'receive'
+        producer: 'AI'
+        consumer: 'Platform'
+
+  - stepNumber: 5
+    title: '轮询查询解析结果'
+    purpose: '用户实时查看进度'
+    stepType: 'async'
+    polling: # 轮询配置（仅轮询场景）
+      frequency: '每10秒'
+      api: 'GET /api/v1/tasks/{package_no}'
+      display: '显示进度条'
+
+  - stepNumber: 6
+    title: '消费解析结果'
+    purpose: '同步数据、更新状态、展示结果'
+    stepType: 'display'
+    closureCheck: true # 标记闭环验证点
+
+# === 关键 API 调用 ===
+apiCalls:
+  - step: 1
+    method: 'POST'
+    path: '/api/asset-packages'
+    response: '返回 packageId'
+    actor: 'DB' # 调用目标
+
+  - step: 2
+    method: 'GET'
+    path: '/templates/debtor-template.xlsx'
+    actor: 'MinIO'
+
+  - step: 2
+    method: 'POST'
+    path: '/api/asset-packages/{id}/debtors'
+    response: '保存成功'
+    actor: 'DB'
+
+  - step: 3
+    method: 'POST'
+    path: '/api/asset-packages/multipart/init'
+    note: '初始化分片上传'
+
+  - step: 3
+    method: 'POST'
+    path: '/api/asset-packages/multipart/complete'
+    note: '合并分片'
+
+  - step: 5
+    method: 'GET'
+    path: '/api/v1/tasks/{package_no}'
+    actor: 'AI'
+    inLoop: true # 在 loop 结构中
+
+  - step: 6
+    method: 'GET'
+    path: '/api/asset-packages/{id}'
+    response: '返回资产包详情'
+
+# === 约束验证 ===
+constraints:
+  stepsCount: 6 # 必须 ≤ 7
+  participantsCount: 5 # 必须 ≤ 5
+
+# === 闭环验证 ===
+closure:
+  finalResult: "用户看到'已完成'状态和借款人列表"
+  userPerceives: true # 用户是否感知到结果

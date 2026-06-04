@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python:*)",
+      "Bash(ls -la .claude/rules/*.md)",
+      "Bash(npx tsc:*)",
+      "Bash(npm run:*)",
+      "Bash(git checkout:*)",
+      "Bash(npx tsx *)"
+    ]
+  },
+  "enableAllProjectMcpServers": true
+}
